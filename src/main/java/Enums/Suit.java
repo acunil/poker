@@ -2,6 +2,8 @@ package Enums;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Objects;
+
 @RequiredArgsConstructor
 public enum Suit {
     SPADES("Spades"),
@@ -16,7 +18,16 @@ public enum Suit {
         return name;
     }
 
-    public char getLabel() {
-        return name.charAt(0);
+    public String getLabel() {
+        return String.valueOf(name.charAt(0));
+    }
+
+    public static Suit fromLabel(String label) {
+        for (Suit suit : Suit.values()) {
+            if (Objects.equals(suit.getLabel(), label)) {
+                return suit;
+            }
+        }
+        return null;
     }
 }

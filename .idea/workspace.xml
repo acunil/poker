@@ -4,19 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee80f807-24e2-406b-a8d4-f3147ee07244" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Enums/CardType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Enums/Deck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Enums/Suit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/FirstTest.java" afterDir="false" />
+    <list default="true" id="ee80f807-24e2-406b-a8d4-f3147ee07244" name="Changes" comment="establishes deck and cards enums">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Enums/Hand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Helpers/GeneralUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Helpers/IdentifyHandUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Enums/CardTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Enums/CardTypeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Enums/SuitTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Helpers/GeneralUtilTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Helpers/IdentifyHandUtilTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/CardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/Suit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/Suit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +30,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -36,6 +39,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2KdahgkvaNLhHfTnfko9C7hTIN9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -50,6 +56,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -60,16 +68,96 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Projects\poker\Poker\src\main\resources" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="Helpers.GeneralUtil" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Enums" />
     </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="Enums" />
+      <recent name="Helpers" />
+    </key>
   </component>
-  <component name="RunManager">
-    <configuration name="FirstTest.printDeck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CardTest.isSameAs_False">
+    <configuration name="CardTest.compareTo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Poker" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="FirstTest" />
-      <option name="METHOD_NAME" value="printDeck" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Enums.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Enums" />
+      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
+      <option name="METHOD_NAME" value="compareTo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CardTest.isGreaterThan" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Poker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Enums.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Enums" />
+      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
+      <option name="METHOD_NAME" value="isGreaterThan" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CardTest.isLowerThan" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Poker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Enums.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Enums" />
+      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
+      <option name="METHOD_NAME" value="isLowerThan" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CardTest.isSameAs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Poker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Enums.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Enums" />
+      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
+      <option name="METHOD_NAME" value="isSameAs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CardTest.isSameAs_False" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Poker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Enums.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Enums" />
+      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
+      <option name="METHOD_NAME" value="isSameAs_False" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -77,7 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FirstTest.printDeck" />
+        <item itemvalue="JUnit.CardTest.isSameAs_False" />
+        <item itemvalue="JUnit.CardTest.isSameAs" />
+        <item itemvalue="JUnit.CardTest.isLowerThan" />
+        <item itemvalue="JUnit.CardTest.isGreaterThan" />
+        <item itemvalue="JUnit.CardTest.compareTo" />
       </list>
     </recent_temporary>
   </component>
@@ -90,6 +182,14 @@
       <option name="presentableId" value="Default" />
       <updated>1674307039975</updated>
     </task>
+    <task id="LOCAL-00001" summary="establishes deck and cards enums">
+      <created>1674311356689</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1674311356689</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,6 +202,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="establishes deck and cards enums" />
+    <option name="LAST_COMMIT_MESSAGE" value="establishes deck and cards enums" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

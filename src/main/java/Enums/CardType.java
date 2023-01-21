@@ -1,10 +1,12 @@
 package Enums;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public enum CardType {
-    ACE("Ace",1, "A"),
     TWO("Two",2, "2"),
     THREE("Three",3, "3"),
     FOUR("Four",4, "4"),
@@ -16,14 +18,29 @@ public enum CardType {
     TEN("Ten", 10, "T"),
     JACK("Jack", 11, "J"),
     QUEEN("Queen", 12, "Q"),
-    KING("King", 13, "K");
+    KING("King", 13, "K"),
+    ACE("Ace",14, "A");
 
-    final String name;
-    final Integer value;
-    final String label;
+    @Getter
+    public final String name;
+
+    @Getter
+    public final Integer value;
+
+    @Getter
+    public final String label;
 
     @Override
     public String toString() {
         return name;
+    }
+
+    public static CardType fromLabel(String label) {
+        for (CardType cardType : CardType.values()) {
+            if (Objects.equals(cardType.getLabel(), label)) {
+                return cardType;
+            }
+        }
+        return null;
     }
 }

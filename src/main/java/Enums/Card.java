@@ -1,12 +1,15 @@
 package Enums;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Objects;
 
 import static Enums.CardType.*;
 import static Enums.Suit.*;
 
 @RequiredArgsConstructor
-public enum Deck {
+public enum Card {
     ACE_SPADES(1, ACE, SPADES),
     TWO_SPADES(2, TWO, SPADES),
     THREE_SPADES(3, THREE, SPADES),
@@ -60,8 +63,13 @@ public enum Deck {
     QUEEN_DIAMONDS(51, QUEEN, DIAMONDS),
     KING_DIAMONDS(52, KING, DIAMONDS);
 
+    @Getter
     final Integer deckIndex;
+
+    @Getter
     final CardType cardType;
+
+    @Getter
     final Suit suit;
 
     @Override
@@ -73,12 +81,37 @@ public enum Deck {
         return cardType + " of " + suit;
     }
     
-    public String getCardLabel() {
-        return cardType.label + suit.getLabel();
+    public String getLabel() {
+        return cardType.getLabel() + suit.getLabel();
     }
     
-    public Integer getCardValue() {
-        return cardType.value;
+    public Integer getValue() {
+        return cardType.getValue();
+    }
+
+    public Integer compare(Card target) {
+        return this.getValue().compareTo(target.getValue());
+    }
+
+    public boolean isHigherThan(Card target) {
+        return this.compare(target) == 1;
+    }
+
+    public boolean isLowerThan(Card target) {
+        return this.compare(target) == -1;
+    }
+
+    public boolean isSameAs(Card target) {
+        return this.compare(target) == 0;
+    }
+
+    public static Card fromLabel(String label) {
+        for (Card card : Card.values()) {
+            if (Objects.equals(card.getLabel(), label)) {
+                return card;
+            }
+        }
+        return null;
     }
     
 }

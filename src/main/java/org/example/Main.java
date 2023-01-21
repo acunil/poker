@@ -1,6 +1,6 @@
 package org.example;
 
-import Enums.Deck;
+import Enums.Card;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class Main {
     }
     
     public static void listDeck() {
-        for (Deck card : Deck.values()) {
+        for (Card card : Card.values()) {
             System.out.println(card);
         }
     }
