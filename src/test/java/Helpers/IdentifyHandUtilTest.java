@@ -19,6 +19,13 @@ class IdentifyHandUtilTest {
         assertThat(result).containsExactly(KING_SPADES, JACK_HEARTS, TEN_CLUBS, NINE_DIAMONDS, FIVE_DIAMONDS);
     }
 
+    @Test
+    void getPairHand() {
+        List<Card> input = List.of(KING_SPADES, JACK_HEARTS, FOUR_SPADES, FIVE_DIAMONDS, NINE_DIAMONDS, KING_HEARTS, TEN_CLUBS);
+        List<Card> result = IdentifyHandUtil.getPairHand(input);
+        assertThat(result).containsExactly(KING_SPADES, KING_HEARTS, JACK_HEARTS, TEN_CLUBS, NINE_DIAMONDS);
+    }
+
 
     @Test
     void verifyHand_givenNullInput_throwsException() {

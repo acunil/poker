@@ -9,11 +9,17 @@ public class IdentifyHandUtil {
 
     public static List<Card> getHighCardHand(List<Card> input) {
         verifyHand(input);
-        return GeneralUtil.orderCardsByValue(input).subList(0, 5);
+        return GeneralUtil.getHighestCards(input, 5);
     }
 
     public static List<Card> getPairHand(List<Card> input) {
-        return null; // TODO
+        // TODO
+        verifyHand(input);
+
+
+
+
+        return null;
     }
 
     protected static void verifyHand(List<Card> input) {

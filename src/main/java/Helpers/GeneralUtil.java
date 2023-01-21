@@ -38,4 +38,7 @@ public class GeneralUtil {
         return labels.stream().map(Card::fromLabel).collect(Collectors.toList());
     }
 
+    public static List<Card> getHighestCards(List<Card> cards, int count) {
+        return orderCardsByValue(cards).subList(0, count);
+    }
 }
