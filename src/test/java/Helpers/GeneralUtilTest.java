@@ -41,17 +41,17 @@ class GeneralUtilTest {
         assertThat(result).isEqualTo(QUEEN_CLUBS.getValue());
     }
 
-    @Test // TODO Fix
+    @Test
     void orderCardsByValue_returnsListOfCardsWithMostValuableFirst() {
         List<Card> input = List.of(FIVE_CLUBS, ACE_DIAMONDS, JACK_HEARTS, KING_SPADES, FOUR_CLUBS, NINE_DIAMONDS, THREE_HEARTS);
         List<Card> result = GeneralUtil.orderCardsByValue(input);
-        assertThat(result).isEqualTo(List.of(ACE_DIAMONDS, KING_SPADES, JACK_HEARTS, NINE_DIAMONDS, FIVE_CLUBS, FOUR_CLUBS, THREE_HEARTS));
+        assertThat(result).containsExactly(ACE_DIAMONDS, KING_SPADES, JACK_HEARTS, NINE_DIAMONDS, FIVE_CLUBS, FOUR_CLUBS, THREE_HEARTS);
     }
 
     @Test
     void getCardsFromLabel() {
         String input = "3D,9C,5C,AD,KH";
         List<Card> result = GeneralUtil.getCardsFromLabel(input);
-        assertThat(result).isEqualTo(List.of(THREE_DIAMONDS, NINE_CLUBS, FIVE_CLUBS, ACE_DIAMONDS, KING_HEARTS));
+        assertThat(result).containsExactly(THREE_DIAMONDS, NINE_CLUBS, FIVE_CLUBS, ACE_DIAMONDS, KING_HEARTS);
     }
 }

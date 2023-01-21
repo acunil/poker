@@ -2,10 +2,11 @@ package Helpers;
 
 import Enums.Card;
 import Enums.CardType;
+import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +27,10 @@ public class GeneralUtil {
     }
 
     public static List<Card> orderCardsByValue(List<Card> input) {
-        return input.stream().sorted(Card::compare).sorted(Collections.reverseOrder()).toList();
+        val list = new ArrayList<>(input.stream().sorted(Card::compare).toList());
+        ArrayList<Card> reversed = new ArrayList<>();
+        list.forEach(card -> reversed.add(0, card));
+        return reversed;
     }
 
     public static List<Card> getCardsFromLabel(String label) {
