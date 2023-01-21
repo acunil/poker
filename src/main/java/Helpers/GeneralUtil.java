@@ -2,7 +2,6 @@ package Helpers;
 
 import Enums.Card;
 import Enums.CardType;
-import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

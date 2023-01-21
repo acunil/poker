@@ -26,6 +26,11 @@ class CardTest {
     }
 
     @Test
+    void compareToFalse() {
+        assertThat(Card.SIX_SPADES.compare(Card.QUEEN_DIAMONDS)).isEqualTo(-1);
+    }
+
+    @Test
     void isHigherThan() {
         assertThat(Card.EIGHT_DIAMONDS.isHigherThan(Card.FIVE_HEARTS)).isTrue();
     }

@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee80f807-24e2-406b-a8d4-f3147ee07244" name="Changes" comment="establishes deck and cards enums">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Enums/Hand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Helpers/GeneralUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Helpers/IdentifyHandUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Enums/CardTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Enums/CardTypeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Enums/SuitTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Helpers/GeneralUtilTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Helpers/IdentifyHandUtilTest.java" afterDir="false" />
+    <list default="true" id="ee80f807-24e2-406b-a8d4-f3147ee07244" name="Changes" comment="adds helper functions to enums">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Enums/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/CardType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/Suit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/Suit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Helpers/GeneralUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Helpers/GeneralUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Helpers/IdentifyHandUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Helpers/IdentifyHandUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Enums/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Enums/CardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Enums/CardTypeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Enums/CardTypeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Helpers/GeneralUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Helpers/GeneralUtilTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Helpers/IdentifyHandUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Helpers/IdentifyHandUtilTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +76,8 @@
       <recent name="Helpers" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CardTest.isSameAs_False">
-    <configuration name="CardTest.compareTo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.GeneralUtilTest.orderCardsByValue_returnsListOfCardsWithMostValuableFirst">
+    <configuration name="CardTest.compareToFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Poker" />
       <extension name="coverage">
         <pattern>
@@ -93,55 +87,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Enums" />
       <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
-      <option name="METHOD_NAME" value="compareTo" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CardTest.isGreaterThan" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Poker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Enums" />
-      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
-      <option name="METHOD_NAME" value="isGreaterThan" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CardTest.isLowerThan" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Poker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Enums" />
-      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
-      <option name="METHOD_NAME" value="isLowerThan" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CardTest.isSameAs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Poker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Enums" />
-      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
-      <option name="METHOD_NAME" value="isSameAs" />
+      <option name="METHOD_NAME" value="compareToFalse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -163,13 +109,61 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GeneralUtilTest.getHighestCardValue_returnsHighestValue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Poker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Helpers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Helpers" />
+      <option name="MAIN_CLASS_NAME" value="Helpers.GeneralUtilTest" />
+      <option name="METHOD_NAME" value="getHighestCardValue_returnsHighestValue" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeneralUtilTest.orderCardsByValue_returnsListOfCardsWithMostValuableFirst" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Poker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Helpers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Helpers" />
+      <option name="MAIN_CLASS_NAME" value="Helpers.GeneralUtilTest" />
+      <option name="METHOD_NAME" value="orderCardsByValue_returnsListOfCardsWithMostValuableFirst" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IdentifyHandUtilTest.getHighCardHand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Poker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Helpers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Helpers" />
+      <option name="MAIN_CLASS_NAME" value="Helpers.IdentifyHandUtilTest" />
+      <option name="METHOD_NAME" value="getHighCardHand" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GeneralUtilTest.orderCardsByValue_returnsListOfCardsWithMostValuableFirst" />
+        <item itemvalue="JUnit.CardTest.compareToFalse" />
+        <item itemvalue="JUnit.IdentifyHandUtilTest.getHighCardHand" />
+        <item itemvalue="JUnit.GeneralUtilTest.getHighestCardValue_returnsHighestValue" />
         <item itemvalue="JUnit.CardTest.isSameAs_False" />
-        <item itemvalue="JUnit.CardTest.isSameAs" />
-        <item itemvalue="JUnit.CardTest.isLowerThan" />
-        <item itemvalue="JUnit.CardTest.isGreaterThan" />
-        <item itemvalue="JUnit.CardTest.compareTo" />
       </list>
     </recent_temporary>
   </component>
@@ -189,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674311356689</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adds helper functions to enums">
+      <created>1674323771795</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1674323771795</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,7 +206,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="establishes deck and cards enums" />
-    <option name="LAST_COMMIT_MESSAGE" value="establishes deck and cards enums" />
+    <MESSAGE value="adds helper functions to enums" />
+    <option name="LAST_COMMIT_MESSAGE" value="adds helper functions to enums" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,7 +1,6 @@
 package Helpers;
 
 import Enums.Card;
-import lombok.val;
 
 import java.util.HashSet;
 import java.util.List;
@@ -10,8 +9,7 @@ public class IdentifyHandUtil {
 
     public static List<Card> getHighCardHand(List<Card> input) {
         verifyHand(input);
-        val x = input.stream().sorted();
-        return null; // TODO
+        return GeneralUtil.orderCardsByValue(input).subList(0, 5);
     }
 
     public static List<Card> getPairHand(List<Card> input) {

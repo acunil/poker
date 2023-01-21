@@ -27,4 +27,6 @@ class CardTypeTest {
         assertThat(CardType.fromLabel(label)).isEqualTo(expected);
     }
 
+
+
 }

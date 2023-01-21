@@ -1,14 +1,24 @@
 package Helpers;
 
+import Enums.Card;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static Enums.Card.*;
 import static Enums.Card.KING_SPADES;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class IdentifyHandUtilTest {
+
+    @Test
+    void getHighCardHand() {
+        List<Card> input = List.of(KING_SPADES, JACK_HEARTS, FOUR_SPADES, FIVE_DIAMONDS, NINE_DIAMONDS, TWO_HEARTS, TEN_CLUBS);
+        List<Card> result = IdentifyHandUtil.getHighCardHand(input);
+        assertThat(result).containsExactly(KING_SPADES, JACK_HEARTS, TEN_CLUBS, NINE_DIAMONDS, FIVE_DIAMONDS);
+    }
+
 
     @Test
     void verifyHand_givenNullInput_throwsException() {

@@ -2,6 +2,7 @@ package Helpers;
 
 import Enums.Card;
 import Enums.CardType;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -27,17 +28,24 @@ class GeneralUtilTest {
     }
 
     @Test
-    void getHighestCardValue_returnsHighestValue() {
+    void getHighestCardTypeValue_returnsHighestValue() {
         List<CardType> input = List.of(EIGHT, JACK);
         Integer result = GeneralUtil.getHighestCardTypeValue(input);
         assertThat(result).isEqualTo(JACK.getValue());
     }
 
     @Test
+    void getHighestCardValue_returnsHighestValue() {
+        List<Card> input = List.of(EIGHT_DIAMONDS, QUEEN_CLUBS, FOUR_SPADES);
+        val result = GeneralUtil.getHighestCardValue(input);
+        assertThat(result).isEqualTo(QUEEN_CLUBS.getValue());
+    }
+
+    @Test // TODO Fix
     void orderCardsByValue_returnsListOfCardsWithMostValuableFirst() {
-        List<Card> input = List.of(FIVE_CLUBS, ACE_DIAMONDS, JACK_HEARTS);
+        List<Card> input = List.of(FIVE_CLUBS, ACE_DIAMONDS, JACK_HEARTS, KING_SPADES, FOUR_CLUBS, NINE_DIAMONDS, THREE_HEARTS);
         List<Card> result = GeneralUtil.orderCardsByValue(input);
-        assertThat(result).isEqualTo(List.of(ACE_DIAMONDS, JACK_HEARTS, FIVE_CLUBS));
+        assertThat(result).isEqualTo(List.of(ACE_DIAMONDS, KING_SPADES, JACK_HEARTS, NINE_DIAMONDS, FIVE_CLUBS, FOUR_CLUBS, THREE_HEARTS));
     }
 
     @Test

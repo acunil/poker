@@ -43,4 +43,8 @@ public enum CardType {
         }
         return null;
     }
+
+    public Integer compare(CardType target) {
+        return value.compareTo(target.getValue());
+    }
 }
