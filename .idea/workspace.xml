@@ -4,203 +4,76 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee80f807-24e2-406b-a8d4-f3147ee07244" name="Changes" comment="fixes orderCardsByValue">
+    <list default="true" id="c603515b-e7c7-43e8-adbb-2f1af7f70799" name="Changes" comment="implements checkstyle">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Lucian.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/checkstyle/config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/checkstyle/import-control.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/checkstyle/suppressions.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Helpers/GeneralUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Helpers/GeneralUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Helpers/IdentifyHandUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Helpers/IdentifyHandUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Helpers/IdentifyHandUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Helpers/IdentifyHandUtilTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Components/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Components/Hand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Components/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Components/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Enums/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Enums/CardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/HandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Enums/HandType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/Suit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Enums/Suit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Helpers/GeneralUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Helpers/GeneralUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Helpers/IdentifyHandUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/base/domain/Helpers/IdentifyHandUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Enums/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/base/domain/Enums/CardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Enums/CardTypeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/base/domain/Enums/CardTypeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Enums/SuitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/base/domain/Enums/SuitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Helpers/GeneralUtilTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/base/domain/Helpers/GeneralUtilTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Helpers/IdentifyHandUtilTestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/base/domain/Helpers/IdentifyHandUtilTestType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Enum" />
-        <option value="Class" />
-        <option value="JUnit5 Test Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectId" id="2KdahgkvaNLhHfTnfko9C7hTIN9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+    "last_opened_file_path": "E:/Projects/poker/Poker/src/main/java/org/example/base/domain"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Projects\poker\Poker\src\main\resources" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="Helpers.GeneralUtil" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="Enums" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="Enums" />
-      <recent name="Helpers" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.IdentifyHandUtilTest.getHighCardHand">
-    <configuration name="CardTest.compareToFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="GeneralUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Poker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Enums.*" />
+          <option name="PATTERN" value="org.example.base.domain.Helpers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Enums" />
-      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
-      <option name="METHOD_NAME" value="compareToFalse" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CardTest.isSameAs_False" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Poker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Enums" />
-      <option name="MAIN_CLASS_NAME" value="Enums.CardTest" />
-      <option name="METHOD_NAME" value="isSameAs_False" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GeneralUtilTest.getHighestCardValue_returnsHighestValue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Poker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Helpers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Helpers" />
-      <option name="MAIN_CLASS_NAME" value="Helpers.GeneralUtilTest" />
-      <option name="METHOD_NAME" value="getHighestCardValue_returnsHighestValue" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GeneralUtilTest.orderCardsByValue_returnsListOfCardsWithMostValuableFirst" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Poker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Helpers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Helpers" />
-      <option name="MAIN_CLASS_NAME" value="Helpers.GeneralUtilTest" />
-      <option name="METHOD_NAME" value="orderCardsByValue_returnsListOfCardsWithMostValuableFirst" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IdentifyHandUtilTest.getHighCardHand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Poker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Helpers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Helpers" />
-      <option name="MAIN_CLASS_NAME" value="Helpers.IdentifyHandUtilTest" />
-      <option name="METHOD_NAME" value="getHighCardHand" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="org.example.base.domain.Helpers" />
+      <option name="MAIN_CLASS_NAME" value="org.example.base.domain.Helpers.GeneralUtilTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.IdentifyHandUtilTest.getHighCardHand" />
-        <item itemvalue="JUnit.GeneralUtilTest.orderCardsByValue_returnsListOfCardsWithMostValuableFirst" />
-        <item itemvalue="JUnit.CardTest.compareToFalse" />
-        <item itemvalue="JUnit.GeneralUtilTest.getHighestCardValue_returnsHighestValue" />
-        <item itemvalue="JUnit.CardTest.isSameAs_False" />
+        <item itemvalue="JUnit.GeneralUtilTest" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="ee80f807-24e2-406b-a8d4-f3147ee07244" name="Changes" comment="" />
-      <created>1674307039975</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1674307039975</updated>
-    </task>
-    <task id="LOCAL-00001" summary="establishes deck and cards enums">
-      <created>1674311356689</created>
+    <task id="LOCAL-00001" summary="adds Hand&#10;&#10;adds getPairHand">
+      <created>1674386820112</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1674311356689</updated>
+      <updated>1674386820112</updated>
     </task>
-    <task id="LOCAL-00002" summary="adds helper functions to enums">
-      <created>1674323771795</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1674323771795</updated>
-    </task>
-    <task id="LOCAL-00003" summary="adds more tests">
-      <created>1674325162439</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1674325162439</updated>
-    </task>
-    <task id="LOCAL-00004" summary="fixes orderCardsByValue">
-      <created>1674332805159</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1674332805159</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,11 +88,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="establishes deck and cards enums" />
-    <MESSAGE value="adds helper functions to enums" />
-    <MESSAGE value="adds more tests" />
-    <MESSAGE value="fixes orderCardsByValue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes orderCardsByValue" />
+    <MESSAGE value="adds Hand&#10;&#10;adds getPairHand" />
+    <MESSAGE value="implements checkstyle" />
+    <option name="LAST_COMMIT_MESSAGE" value="implements checkstyle" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,9 +1,9 @@
-package Enums;
+package org.example.base.domain.Enums;
+
+import java.util.Objects;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Objects;
 
 @RequiredArgsConstructor
 public enum CardType {

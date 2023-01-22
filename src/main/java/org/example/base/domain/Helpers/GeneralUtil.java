@@ -1,15 +1,15 @@
-package Helpers;
-
-import Enums.Card;
-import Enums.CardType;
-import lombok.val;
-import org.apache.commons.lang3.StringUtils;
+package org.example.base.domain.Helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.example.base.domain.Enums.Card;
+import org.example.base.domain.Enums.CardType;
+import lombok.val;
+import org.apache.commons.lang3.StringUtils;
 
 public class GeneralUtil {
     public static final int HOLDEM_INPUT_SIZE = 7;
@@ -22,11 +22,11 @@ public class GeneralUtil {
         return input.stream().max(Comparator.comparingInt(Card::getValue)).get().getValue();
     }
 
-    public static String getLabels(List<Card> input) {
+    public static String getLabelFromCards(List<Card> input) {
         return StringUtils.join(input.stream().map(Card::getLabel).collect(Collectors.toList()), ",");
     }
 
-    public static List<Card> orderCardsByValue(List<Card> input) {
+    protected static List<Card> orderCardsByValue(List<Card> input) {
         val list = new ArrayList<>(input.stream().sorted(Card::compare).toList());
         ArrayList<Card> reversed = new ArrayList<>();
         list.forEach(card -> reversed.add(0, card));

@@ -1,10 +1,10 @@
-package Enums;
+package org.example.base.domain.Enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum Hand {
+public enum HandType {
     ROYAL_FLUSH("Royal flush", 1),
     STRAIGHT_FLUSH("Straight flush", 2),
     FOUR_KIND("Four of a kind", 3),
