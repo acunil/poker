@@ -20,11 +20,11 @@ class IdentifyHandUtilTest {
     public static final String HIGH_CARD_OUTPUT = "AS,KH,TD,8S,5C";
     public static final String PAIR_INPUT = "4D,JH,KC,4C,3H,AS,8D";
     public static final String PAIR_OUTPUT = "4C,4D,AS,KC,JH";
-    public static final String TWO_PAIR_INPUT = "AD,KC,KS,4C,3H,AH,8D";
+    public static final String TWO_PAIR_INPUT = "AD,KS,KC,4C,3H,AH,8D";
     public static final String TWO_PAIR_OUTPUT = "AH,AD,KS,KC,8D";
-    public static final String THREE_KIND_INPUT = "9S,9C,4C,9H,8D,KH,AD";
+    public static final String THREE_KIND_INPUT = "9S,9H,4C,9C,8D,KH,AD";
     public static final String THREE_KIND_OUTPUT = "9S,9C,9H,AD,KH";
-    public static final String FOUR_KIND_INPUT = "9S,9C,4C,9H,8D,KH,9D";
+    public static final String FOUR_KIND_INPUT = "9H,9C,4C,9S,8D,KH,9D";
     public static final String FOUR_KIND_OUTPUT = "9S,9C,9H,9D,KH";
 
     @Test
@@ -80,7 +80,7 @@ class IdentifyHandUtilTest {
     }
 
     @Test
-    void getThreeKindHand() {
+    void getThreeOfAKindHand() {
         List<Card> input = getCardsFromLabel(THREE_KIND_INPUT);
         List<Card> expected = getCardsFromLabel(THREE_KIND_OUTPUT);
         Hand result = IdentifyHandUtil.getThreeOfAKindHand(input);
@@ -96,9 +96,31 @@ class IdentifyHandUtilTest {
             HIGH_CARD_INPUT,
             FOUR_KIND_INPUT
     })
-    void getThreeKindHand_givenNotExactlyThreeKind_ReturnsNull(String input) {
+    void getThreeOfAKindHand_givenNotExactlyThreeOfAKind_ReturnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getThreeOfAKindHand(cards)).isNull();
+    }
+
+    @Test
+    void getFourOfAKindHand() {
+        List<Card> input = getCardsFromLabel(FOUR_KIND_INPUT);
+        List<Card> expected = getCardsFromLabel(FOUR_KIND_OUTPUT);
+        Hand result = IdentifyHandUtil.getFourOfAKindHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.FOUR_KIND);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            TWO_PAIR_INPUT,
+            PAIR_INPUT,
+            HIGH_CARD_INPUT,
+            THREE_KIND_INPUT
+    })
+    void getFourOfAKindHand_givenNotExactlyFourOfAKind_ReturnsNull(String input) {
+        List<Card> cards = getCardsFromLabel(input);
+        assertThat(IdentifyHandUtil.getFourOfAKindHand(cards)).isNull();
     }
 
     @Test

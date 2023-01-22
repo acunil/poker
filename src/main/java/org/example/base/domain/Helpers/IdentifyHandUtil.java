@@ -80,6 +80,22 @@ public class IdentifyHandUtil {
         }
     }
 
+    public static Hand getFourOfAKindHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        CardInput cardInput = new CardInput(input);
+        List<List<Card>> fourKinds = cardInput.getFourOfAKinds();
+        if (fourKinds.isEmpty()) {
+            return null;
+        } else {
+            val allFourKinds = new ArrayList<>(fourKinds.get(0));
+            allFourKinds.sort(Comparator.comparingInt(Card::getValue));
+            val singleCards = input.stream().filter(card -> !allFourKinds.contains(card)).toList();
+            val highCard = GeneralUtil.getHighestCards(singleCards, 1);
+            val result = Stream.concat(allFourKinds.stream(), highCard.stream()).toList();
+            return new Hand(HandType.FOUR_KIND, result);
+        }
+    }
+
     protected static void verifyInput(@NonNull List<Card> input) {
         if (input.size() != GeneralUtil.HOLDEM_INPUT_SIZE) {
             throw new IllegalArgumentException("Cards input size must be " + GeneralUtil.HOLDEM_INPUT_SIZE);
