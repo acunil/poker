@@ -41,6 +41,14 @@ public class IdentifyHandUtil {
         return new Hand(HandType.PAIR, result);
     }
 
+    public static Hand getTwoPairHand(@NonNull List<Card> input) {
+        ArrayList<Card> result = new ArrayList<>();
+        if (result.isEmpty()) {
+            return null;
+        }
+        return new Hand(HandType.TWO_PAIR, result);
+    }
+
     protected static void verifyInput(@NonNull List<Card> input) {
         if (input.size() != GeneralUtil.HOLDEM_INPUT_SIZE) {
             throw new IllegalArgumentException("Cards input size must be " + GeneralUtil.HOLDEM_INPUT_SIZE);
