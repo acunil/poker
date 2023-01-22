@@ -1,9 +1,15 @@
 package org.example.base.domain.Helpers;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
+import lombok.val;
+import org.example.base.domain.Components.CardInput;
 import org.example.base.domain.Components.Hand;
 import org.example.base.domain.Enums.Card;
 import org.example.base.domain.Enums.CardType;
@@ -39,6 +45,23 @@ public class IdentifyHandUtil {
         result.addAll(pairedCards);
         result.addAll(GeneralUtil.getHighestCards(unpairedCards, 3));
         return new Hand(HandType.PAIR, result);
+    }
+
+    public static Hand getTwoPairHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        CardInput cardInput = new CardInput(input);
+        List<List<Card>> pairs = cardInput.getPairs();
+        if (pairs.size() != 2 || !cardInput.getThreeOfAKinds().isEmpty()) {
+            return null;
+        } else {
+            val allPairs = new ArrayList<>(pairs.stream().flatMap(Collection::stream).toList());
+            allPairs.sort(Comparator.comparingInt(Card::getValue));
+            Collections.reverse(allPairs);
+            val singleCards = input.stream().filter(card -> !allPairs.contains(card)).toList();
+            val highCard = GeneralUtil.getHighestCards(singleCards, 1);
+            val result = Stream.concat(allPairs.stream(), highCard.stream()).toList();
+            return new Hand(HandType.TWO_PAIR, result);
+        }
     }
 
     protected static void verifyInput(@NonNull List<Card> input) {
