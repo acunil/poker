@@ -1,36 +1,52 @@
 package Helpers;
 
+import Components.Hand;
 import Enums.Card;
+import Enums.CardType;
+import Enums.HandType;
+import lombok.NonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class IdentifyHandUtil {
 
-    public static List<Card> getHighCardHand(List<Card> input) {
-        verifyHand(input);
-        return GeneralUtil.getHighestCards(input, 5);
+    public static Hand getHighCardHand(List<Card> input) {
+        verifyInput(input);
+        return new Hand(HandType.HIGH_CARD, GeneralUtil.getHighestCards(input, 5));
     }
 
-    public static List<Card> getPairHand(List<Card> input) {
-        // TODO
-        verifyHand(input);
-
-
-
-
-        return null;
-    }
-
-    protected static void verifyHand(List<Card> input) {
-        if (input == null) {
-            throw new IllegalArgumentException("Cards input must not be null");
+    public static Hand getPairHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        ArrayList<Card> singles = new ArrayList<>();
+        ArrayList<Card> duplicates = new ArrayList<>();
+        input.forEach(card -> {
+            if (singles.stream().anyMatch(single -> single.getValue().equals(card.getValue()))) {
+                duplicates.add(card);
+            } else {
+                singles.add(card);
+            }
+        });
+        if (duplicates.size() != 1) {
+            return null;
         }
+
+        CardType pairType = duplicates.get(0).getCardType();
+        List<Card> unpairedCards = input.stream().filter(card -> card.getCardType() != pairType).toList();
+        List<Card> pairedCards = input.stream().filter(card -> !unpairedCards.contains(card)).sorted().toList();
+        ArrayList<Card> result = new ArrayList<>();
+        result.addAll(pairedCards);
+        result.addAll(GeneralUtil.getHighestCards(unpairedCards, 3));
+        return new Hand(HandType.PAIR, result);
+    }
+
+    protected static void verifyInput(@NonNull List<Card> input) {
         if (input.size() != GeneralUtil.HOLDEM_INPUT_SIZE) {
             throw new IllegalArgumentException("Cards input size must be " + GeneralUtil.HOLDEM_INPUT_SIZE);
         }
         if (new HashSet<>(input).size() != 7) {
-            throw new IllegalArgumentException("Cards input must all be unique: " + GeneralUtil.getLabels(input));
+            throw new IllegalArgumentException("Cards input must all be unique: " + GeneralUtil.getLabelFromCards(input));
         }
     }
 

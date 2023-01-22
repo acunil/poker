@@ -22,11 +22,11 @@ public class GeneralUtil {
         return input.stream().max(Comparator.comparingInt(Card::getValue)).get().getValue();
     }
 
-    public static String getLabels(List<Card> input) {
+    public static String getLabelFromCards(List<Card> input) {
         return StringUtils.join(input.stream().map(Card::getLabel).collect(Collectors.toList()), ",");
     }
 
-    public static List<Card> orderCardsByValue(List<Card> input) {
+    protected static List<Card> orderCardsByValue(List<Card> input) {
         val list = new ArrayList<>(input.stream().sorted(Card::compare).toList());
         ArrayList<Card> reversed = new ArrayList<>();
         list.forEach(card -> reversed.add(0, card));

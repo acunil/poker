@@ -22,8 +22,8 @@ class GeneralUtilTest {
 
 
     @Test
-    void getLabels() {
-        String result = GeneralUtil.getLabels(List.of(FIVE_CLUBS, ACE_DIAMONDS, JACK_HEARTS));
+    void getLabelFromCards() {
+        String result = GeneralUtil.getLabelFromCards(List.of(FIVE_CLUBS, ACE_DIAMONDS, JACK_HEARTS));
         assertThat(result).isEqualTo("5C,AD,JH");
     }
 
