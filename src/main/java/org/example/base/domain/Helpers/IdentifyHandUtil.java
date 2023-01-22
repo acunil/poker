@@ -2,8 +2,6 @@ package org.example.base.domain.Helpers;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
@@ -54,9 +52,8 @@ public class IdentifyHandUtil {
         if (pairs.size() != 2 || !cardInput.getThreeOfAKinds().isEmpty()) {
             return null;
         } else {
-            val allPairs = new ArrayList<>(pairs.stream().flatMap(Collection::stream).toList());
-            allPairs.sort(Comparator.comparingInt(Card::getValue));
-            Collections.reverse(allPairs);
+            ArrayList<Card> allPairs = new ArrayList<>(pairs.stream().flatMap(Collection::stream).toList());
+            allPairs.sort(GeneralUtil.orderByValueDescThenSuit);
             val singleCards = input.stream().filter(card -> !allPairs.contains(card)).toList();
             val highCard = GeneralUtil.getHighestCards(singleCards, 1);
             val result = Stream.concat(allPairs.stream(), highCard.stream()).toList();
@@ -72,7 +69,6 @@ public class IdentifyHandUtil {
             return null;
         } else {
             val allThreeKinds = new ArrayList<>(threeKinds.get(0));
-            allThreeKinds.sort(Comparator.comparingInt(Card::getValue));
             val singleCards = input.stream().filter(card -> !allThreeKinds.contains(card)).toList();
             val highCard = GeneralUtil.getHighestCards(singleCards, 2);
             val result = Stream.concat(allThreeKinds.stream(), highCard.stream()).toList();
@@ -87,11 +83,10 @@ public class IdentifyHandUtil {
         if (fourKinds.isEmpty()) {
             return null;
         } else {
-            val allFourKinds = new ArrayList<>(fourKinds.get(0));
-            allFourKinds.sort(Comparator.comparingInt(Card::getValue));
-            val singleCards = input.stream().filter(card -> !allFourKinds.contains(card)).toList();
+            val validCards = new ArrayList<>(fourKinds.get(0));
+            val singleCards = input.stream().filter(card -> !validCards.contains(card)).toList();
             val highCard = GeneralUtil.getHighestCards(singleCards, 1);
-            val result = Stream.concat(allFourKinds.stream(), highCard.stream()).toList();
+            val result = Stream.concat(validCards.stream(), highCard.stream()).toList();
             return new Hand(HandType.FOUR_KIND, result);
         }
     }

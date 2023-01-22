@@ -54,4 +54,12 @@ class GeneralUtilTest {
         List<Card> result = GeneralUtil.getCardsFromLabel(input);
         assertThat(result).containsExactly(THREE_DIAMONDS, NINE_CLUBS, FIVE_CLUBS, ACE_DIAMONDS, KING_HEARTS);
     }
+
+    @Test
+    void compareByValueThenSuit() {
+        String input = "4D,9C,AH,KS,9S";
+        String expected = "AH,KS,9S,9C,4D";
+        assertThat(GeneralUtil.getCardsFromLabel(input).stream().sorted(GeneralUtil.orderByValueDescThenSuit).toList())
+                .isEqualTo(GeneralUtil.getCardsFromLabel(expected));
+    }
 }

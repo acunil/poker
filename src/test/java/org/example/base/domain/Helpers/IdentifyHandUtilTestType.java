@@ -20,12 +20,12 @@ class IdentifyHandUtilTest {
     public static final String HIGH_CARD_OUTPUT = "AS,KH,TD,8S,5C";
     public static final String PAIR_INPUT = "4D,JH,KC,4C,3H,AS,8D";
     public static final String PAIR_OUTPUT = "4C,4D,AS,KC,JH";
-    public static final String TWO_PAIR_INPUT = "AD,KS,KC,4C,3H,AH,8D";
-    public static final String TWO_PAIR_OUTPUT = "AH,AD,KS,KC,8D";
+    public static final String TWO_PAIR_INPUT = "KD,7S,7C,4C,3H,KH,8D";
+    public static final String TWO_PAIR_OUTPUT = "KH,KD,7S,7C,8D";
     public static final String THREE_KIND_INPUT = "9S,9H,4C,9C,8D,KH,AD";
     public static final String THREE_KIND_OUTPUT = "9S,9C,9H,AD,KH";
-    public static final String FOUR_KIND_INPUT = "9H,9C,4C,9S,8D,KH,9D";
-    public static final String FOUR_KIND_OUTPUT = "9S,9C,9H,9D,KH";
+    public static final String FOUR_KIND_INPUT = "AH,9H,9C,4C,9S,8D,9D";
+    public static final String FOUR_KIND_OUTPUT = "9S,9C,9H,9D,AH";
 
     @Test
     void getHighCardHand() {
