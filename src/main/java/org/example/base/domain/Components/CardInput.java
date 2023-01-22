@@ -88,7 +88,6 @@ public class CardInput {
                 .toList();
     }
 
-
     public List<List<Card>> getFilteredSuits() {
         return Stream.of(getSpades(), getClubs(), getHearts(), getDiamonds())
                 .filter(cards -> !cards.isEmpty())
@@ -105,6 +104,10 @@ public class CardInput {
 
     public List<List<Card>> getFourOfAKinds() {
         return getFilteredValues().stream().filter(cards -> cards.size() == 4).toList();
+    }
+
+    public boolean hasNoDuplicates() {
+        return Stream.of(getPairs(), getThreeOfAKinds(), getFourOfAKinds()).allMatch(List::isEmpty);
     }
 
 }

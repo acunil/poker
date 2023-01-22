@@ -23,7 +23,9 @@ class IdentifyHandUtilTest {
     public static final String TWO_PAIR_INPUT = "AD,KC,KS,4C,3H,AH,8D";
     public static final String TWO_PAIR_OUTPUT = "AH,AD,KS,KC,8D";
     public static final String THREE_KIND_INPUT = "9S,9C,4C,9H,8D,KH,AD";
-    public static final String THREE_KIND_OUTPUT = "9S,9C,9H,AD,KH,8D";
+    public static final String THREE_KIND_OUTPUT = "9S,9C,9H,AD,KH";
+    public static final String FOUR_KIND_INPUT = "9S,9C,4C,9H,8D,KH,9D";
+    public static final String FOUR_KIND_OUTPUT = "9S,9C,9H,9D,KH";
 
     @Test
     void getHighCardHand() {
@@ -47,7 +49,8 @@ class IdentifyHandUtilTest {
     @ValueSource(strings = {
             THREE_KIND_INPUT,
             TWO_PAIR_INPUT,
-            HIGH_CARD_INPUT
+            HIGH_CARD_INPUT,
+            FOUR_KIND_INPUT
     })
     void getPairHand_givenNotExactlyPair_returnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
@@ -68,11 +71,34 @@ class IdentifyHandUtilTest {
     @ValueSource(strings = {
             THREE_KIND_INPUT,
             PAIR_INPUT,
-            HIGH_CARD_INPUT
+            HIGH_CARD_INPUT,
+            FOUR_KIND_INPUT
     })
     void getTwoPairHand_givenNotExactlyTwoPair_returnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getTwoPairHand(cards)).isNull();
+    }
+
+    @Test
+    void getThreeKindHand() {
+        List<Card> input = getCardsFromLabel(THREE_KIND_INPUT);
+        List<Card> expected = getCardsFromLabel(THREE_KIND_OUTPUT);
+        Hand result = IdentifyHandUtil.getThreeOfAKindHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.THREE_KIND);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            TWO_PAIR_INPUT,
+            PAIR_INPUT,
+            HIGH_CARD_INPUT,
+            FOUR_KIND_INPUT
+    })
+    void getThreeKindHand_givenNotExactlyThreeKind_ReturnsNull(String input) {
+        List<Card> cards = getCardsFromLabel(input);
+        assertThat(IdentifyHandUtil.getThreeOfAKindHand(cards)).isNull();
     }
 
     @Test

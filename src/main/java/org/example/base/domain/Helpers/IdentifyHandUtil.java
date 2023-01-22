@@ -64,6 +64,22 @@ public class IdentifyHandUtil {
         }
     }
 
+    public static Hand getThreeOfAKindHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        CardInput cardInput = new CardInput(input);
+        List<List<Card>> threeKinds = cardInput.getThreeOfAKinds();
+        if (threeKinds.size() != 1 || !cardInput.getPairs().isEmpty() || !cardInput.getFourOfAKinds().isEmpty()) {
+            return null;
+        } else {
+            val allThreeKinds = new ArrayList<>(threeKinds.get(0));
+            allThreeKinds.sort(Comparator.comparingInt(Card::getValue));
+            val singleCards = input.stream().filter(card -> !allThreeKinds.contains(card)).toList();
+            val highCard = GeneralUtil.getHighestCards(singleCards, 2);
+            val result = Stream.concat(allThreeKinds.stream(), highCard.stream()).toList();
+            return new Hand(HandType.THREE_KIND, result);
+        }
+    }
+
     protected static void verifyInput(@NonNull List<Card> input) {
         if (input.size() != GeneralUtil.HOLDEM_INPUT_SIZE) {
             throw new IllegalArgumentException("Cards input size must be " + GeneralUtil.HOLDEM_INPUT_SIZE);
