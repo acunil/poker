@@ -1,15 +1,15 @@
-package Helpers;
-
-import Enums.Card;
-import Enums.CardType;
-import lombok.val;
-import org.apache.commons.lang3.StringUtils;
+package org.example.base.domain.Helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.example.base.domain.Enums.Card;
+import org.example.base.domain.Enums.CardType;
+import lombok.val;
+import org.apache.commons.lang3.StringUtils;
 
 public class GeneralUtil {
     public static final int HOLDEM_INPUT_SIZE = 7;

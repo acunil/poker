@@ -1,6 +1,6 @@
 package org.example;
 
-import Enums.Card;
+import org.example.base.domain.Enums.Card;
 
 public class Main {
     public static void main(String[] args) {

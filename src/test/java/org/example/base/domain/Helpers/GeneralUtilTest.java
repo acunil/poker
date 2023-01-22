@@ -1,14 +1,14 @@
-package Helpers;
+package org.example.base.domain.Helpers;
 
-import Enums.Card;
-import Enums.CardType;
+import org.example.base.domain.Enums.Card;
+import org.example.base.domain.Enums.CardType;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static Enums.Card.*;
-import static Enums.CardType.*;
+import static org.example.base.domain.Enums.Card.*;
+import static org.example.base.domain.Enums.CardType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GeneralUtilTest {

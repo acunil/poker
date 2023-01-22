@@ -1,14 +1,14 @@
-package Helpers;
-
-import Components.Hand;
-import Enums.Card;
-import Enums.CardType;
-import Enums.HandType;
-import lombok.NonNull;
+package org.example.base.domain.Helpers;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import org.example.base.domain.Components.Hand;
+import org.example.base.domain.Enums.Card;
+import org.example.base.domain.Enums.CardType;
+import org.example.base.domain.Enums.HandType;
+import lombok.NonNull;
 
 public class IdentifyHandUtil {
 

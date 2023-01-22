@@ -1,4 +1,4 @@
-package Enums;
+package org.example.base.domain.Enums;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

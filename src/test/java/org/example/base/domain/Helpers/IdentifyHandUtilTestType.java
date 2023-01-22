@@ -1,16 +1,15 @@
-package Helpers;
+package org.example.base.domain.Helpers;
 
-import Components.Hand;
-import Enums.Card;
-import Enums.HandType;
-import net.bytebuddy.utility.privilege.GetMethodAction;
+import org.example.base.domain.Components.Hand;
+import org.example.base.domain.Enums.Card;
+import org.example.base.domain.Enums.HandType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static Enums.Card.*;
+import static org.example.base.domain.Enums.Card.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

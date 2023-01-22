@@ -1,13 +1,13 @@
-package Components;
-
-import Enums.Card;
-import Enums.HandType;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+package org.example.base.domain.Components;
 
 import javax.validation.constraints.Size;
 import java.util.List;
+
+import org.example.base.domain.Enums.Card;
+import org.example.base.domain.Enums.HandType;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class Hand {

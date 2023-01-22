@@ -1,8 +1,8 @@
-package Enums;
-
-import lombok.RequiredArgsConstructor;
+package org.example.base.domain.Enums;
 
 import java.util.Objects;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum Suit {
