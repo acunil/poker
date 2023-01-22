@@ -20,8 +20,8 @@ class IdentifyHandUtilTest {
     public static final String HIGH_CARD_OUTPUT = "AS,KH,TD,8S,5C";
     public static final String PAIR_INPUT = "4D,JH,KC,4C,3H,AS,8D";
     public static final String PAIR_OUTPUT = "4C,4D,AS,KC,JH";
-    public static final String TWO_PAIR_INPUT = "AC,KH,KC,4C,3H,AS,8D";
-    public static final String TWO_PAIR_OUTPUT = "AS,AC,KC,KH,8D";
+    public static final String TWO_PAIR_INPUT = "AD,KC,KS,4C,3H,AH,8D";
+    public static final String TWO_PAIR_OUTPUT = "AH,AD,KS,KC,8D";
     public static final String THREE_KIND_INPUT = "9S,9C,4C,9H,8D,KH,AD";
     public static final String THREE_KIND_OUTPUT = "9S,9C,9H,AD,KH,8D";
 
