@@ -1,5 +1,9 @@
 package org.example.base.domain.Components;
 
+import static org.example.base.domain.Enums.CardType.*;
+import static org.example.base.domain.Enums.Suit.*;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -14,71 +18,71 @@ public class CardInput {
     private final List<Card> input;
 
     private List<Card> getTwos() {
-        return input.stream().filter(card -> CardType.TWO.equals(card.getCardType())).toList();
+        return getMatches(TWO);
     }
 
     private List<Card> getThrees() {
-        return input.stream().filter(card -> CardType.THREE.equals(card.getCardType())).toList();
+        return getMatches(THREE);
     }
 
     private List<Card> getFours() {
-        return input.stream().filter(card -> CardType.FOUR.equals(card.getCardType())).toList();
+        return getMatches(FOUR);
     }
 
     private List<Card> getFives() {
-        return input.stream().filter(card -> CardType.FIVE.equals(card.getCardType())).toList();
+        return getMatches(FIVE);
     }
 
     private List<Card> getSixes() {
-        return input.stream().filter(card -> CardType.SIX.equals(card.getCardType())).toList();
+        return getMatches(SIX);
     }
 
     private List<Card> getSevens() {
-        return input.stream().filter(card -> CardType.SEVEN.equals(card.getCardType())).toList();
+        return getMatches(SEVEN);
     }
 
     private List<Card> getEights() {
-        return input.stream().filter(card -> CardType.EIGHT.equals(card.getCardType())).toList();
+        return getMatches(EIGHT);
     }
 
     private List<Card> getNines() {
-        return input.stream().filter(card -> CardType.NINE.equals(card.getCardType())).toList();
+        return getMatches(NINE);
     }
 
     private List<Card> getTens() {
-        return input.stream().filter(card -> CardType.TEN.equals(card.getCardType())).toList();
+        return getMatches(TEN);
     }
 
     private List<Card> getJacks() {
-        return input.stream().filter(card -> CardType.JACK.equals(card.getCardType())).toList();
+        return getMatches(JACK);
     }
 
     private List<Card> getQueens() {
-        return input.stream().filter(card -> CardType.QUEEN.equals(card.getCardType())).toList();
+        return getMatches(QUEEN);
     }
 
     private List<Card> getKings() {
-        return input.stream().filter(card -> CardType.KING.equals(card.getCardType())).toList();
+        return getMatches(KING);
     }
 
     private List<Card> getAces() {
-        return input.stream().filter(card -> CardType.ACE.equals(card.getCardType())).toList();
+        return getMatches(ACE);
     }
 
     private List<Card> getSpades() {
-        return input.stream().filter(card -> Suit.SPADES.equals(card.getSuit())).toList();
+        return getMatches(SPADES);
     }
 
     private List<Card> getClubs() {
-        return input.stream().filter(card -> Suit.CLUBS.equals(card.getSuit())).toList();
+        return getMatches(CLUBS);
     }
 
     private List<Card> getHearts() {
-        return input.stream().filter(card -> Suit.HEARTS.equals(card.getSuit())).toList();
+        return getMatches(HEARTS);
     }
 
     private List<Card> getDiamonds() {
-        return input.stream().filter(card -> Suit.DIAMONDS.equals(card.getSuit())).toList();
+        return getMatches(DIAMONDS);
     }
 
     public List<List<Card>> getFilteredValues() {
@@ -87,7 +91,6 @@ public class CardInput {
                 .filter(cards -> !cards.isEmpty())
                 .toList();
     }
-
 
     public List<List<Card>> getFilteredSuits() {
         return Stream.of(getSpades(), getClubs(), getHearts(), getDiamonds())
@@ -105,6 +108,18 @@ public class CardInput {
 
     public List<List<Card>> getFourOfAKinds() {
         return getFilteredValues().stream().filter(cards -> cards.size() == 4).toList();
+    }
+
+    private List<Card> getMatches(CardType cardType) {
+        return input.stream().filter(card -> cardType.equals(card.getCardType()))
+                .sorted(Comparator.comparing(Card::getSuit))
+                .toList();
+    }
+
+    private List<Card> getMatches(Suit suit) {
+        return input.stream().filter(card -> suit.equals(card.getSuit()))
+                .sorted(Comparator.comparing(Card::getValue))
+                .toList();
     }
 
 }

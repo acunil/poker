@@ -1,15 +1,33 @@
 package org.example.base.domain.Helpers;
 
+import static org.example.base.domain.Enums.Card.ACE_DIAMONDS;
+import static org.example.base.domain.Enums.Card.EIGHT_DIAMONDS;
+import static org.example.base.domain.Enums.Card.FIVE_CLUBS;
+import static org.example.base.domain.Enums.Card.FOUR_CLUBS;
+import static org.example.base.domain.Enums.Card.FOUR_SPADES;
+import static org.example.base.domain.Enums.Card.JACK_HEARTS;
+import static org.example.base.domain.Enums.Card.JACK_SPADES;
+import static org.example.base.domain.Enums.Card.KING_HEARTS;
+import static org.example.base.domain.Enums.Card.KING_SPADES;
+import static org.example.base.domain.Enums.Card.NINE_CLUBS;
+import static org.example.base.domain.Enums.Card.NINE_DIAMONDS;
+import static org.example.base.domain.Enums.Card.QUEEN_CLUBS;
+import static org.example.base.domain.Enums.Card.SEVEN_SPADES;
+import static org.example.base.domain.Enums.Card.THREE_CLUBS;
+import static org.example.base.domain.Enums.Card.THREE_DIAMONDS;
+import static org.example.base.domain.Enums.Card.THREE_HEARTS;
+import static org.example.base.domain.Enums.Card.TWO_SPADES;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.example.base.domain.Enums.CardType.EIGHT;
+import static org.example.base.domain.Enums.CardType.JACK;
+import static org.example.base.domain.Enums.CardType.KING;
+
 import org.example.base.domain.Enums.Card;
 import org.example.base.domain.Enums.CardType;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.example.base.domain.Enums.Card.*;
-import static org.example.base.domain.Enums.CardType.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class GeneralUtilTest {
 
@@ -53,5 +71,13 @@ class GeneralUtilTest {
         String input = "3D,9C,5C,AD,KH";
         List<Card> result = GeneralUtil.getCardsFromLabel(input);
         assertThat(result).containsExactly(THREE_DIAMONDS, NINE_CLUBS, FIVE_CLUBS, ACE_DIAMONDS, KING_HEARTS);
+    }
+
+    @Test
+    void compareByValueThenSuit() {
+        String input = "4D,9C,AH,KS,9S";
+        String expected = "AH,KS,9S,9C,4D";
+        assertThat(GeneralUtil.getCardsFromLabel(input).stream().sorted(GeneralUtil.orderByValueDescThenSuit).toList())
+                .isEqualTo(GeneralUtil.getCardsFromLabel(expected));
     }
 }

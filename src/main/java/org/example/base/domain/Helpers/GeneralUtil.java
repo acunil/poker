@@ -41,4 +41,9 @@ public class GeneralUtil {
     public static List<Card> getHighestCards(List<Card> cards, int count) {
         return orderCardsByValue(cards).subList(0, count);
     }
+
+    public static Comparator<Card> orderByValueDescThenSuit = Comparator.comparing(Card::getValue)
+            .reversed()
+            .thenComparing(Card::getDeckIndex);
+
 }
