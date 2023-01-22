@@ -1,5 +1,15 @@
 package org.example.base.domain.Helpers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.example.base.domain.Enums.Card.ACE_SPADES;
+import static org.example.base.domain.Enums.Card.EIGHT_DIAMONDS;
+import static org.example.base.domain.Enums.Card.FIVE_CLUBS;
+import static org.example.base.domain.Enums.Card.JACK_SPADES;
+import static org.example.base.domain.Enums.Card.KING_SPADES;
+import static org.example.base.domain.Enums.Card.TWO_CLUBS;
+import static org.example.base.domain.Helpers.GeneralUtil.getCardsFromLabel;
+
 import org.example.base.domain.Components.Hand;
 import org.example.base.domain.Enums.Card;
 import org.example.base.domain.Enums.HandType;
@@ -8,11 +18,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
-
-import static org.example.base.domain.Enums.Card.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.base.domain.Helpers.GeneralUtil.getCardsFromLabel;
 
 class IdentifyHandUtilTest {
 

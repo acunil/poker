@@ -1,15 +1,33 @@
 package org.example.base.domain.Helpers;
 
+import static org.example.base.domain.Enums.Card.ACE_DIAMONDS;
+import static org.example.base.domain.Enums.Card.EIGHT_DIAMONDS;
+import static org.example.base.domain.Enums.Card.FIVE_CLUBS;
+import static org.example.base.domain.Enums.Card.FOUR_CLUBS;
+import static org.example.base.domain.Enums.Card.FOUR_SPADES;
+import static org.example.base.domain.Enums.Card.JACK_HEARTS;
+import static org.example.base.domain.Enums.Card.JACK_SPADES;
+import static org.example.base.domain.Enums.Card.KING_HEARTS;
+import static org.example.base.domain.Enums.Card.KING_SPADES;
+import static org.example.base.domain.Enums.Card.NINE_CLUBS;
+import static org.example.base.domain.Enums.Card.NINE_DIAMONDS;
+import static org.example.base.domain.Enums.Card.QUEEN_CLUBS;
+import static org.example.base.domain.Enums.Card.SEVEN_SPADES;
+import static org.example.base.domain.Enums.Card.THREE_CLUBS;
+import static org.example.base.domain.Enums.Card.THREE_DIAMONDS;
+import static org.example.base.domain.Enums.Card.THREE_HEARTS;
+import static org.example.base.domain.Enums.Card.TWO_SPADES;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.example.base.domain.Enums.CardType.EIGHT;
+import static org.example.base.domain.Enums.CardType.JACK;
+import static org.example.base.domain.Enums.CardType.KING;
+
 import org.example.base.domain.Enums.Card;
 import org.example.base.domain.Enums.CardType;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.example.base.domain.Enums.Card.*;
-import static org.example.base.domain.Enums.CardType.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class GeneralUtilTest {
 
