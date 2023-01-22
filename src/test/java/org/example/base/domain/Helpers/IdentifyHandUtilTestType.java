@@ -67,6 +67,16 @@ class IdentifyHandUtilTest {
         assertThat(result.getCards()).isEqualTo(expected);
     }
 
+    @Test
+    void getTwoPairHand_givenThreeMatchingPairs_returnsHighestTwoPairs() {
+        List<Card> input = getCardsFromLabel("9D,4H,QC,QS,4D,JH,9S");
+        List<Card> expected = getCardsFromLabel("QS,QC,9S,9D,JH");
+        Hand result = IdentifyHandUtil.getTwoPairHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.TWO_PAIR);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
             THREE_KIND_INPUT,

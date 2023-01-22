@@ -1,5 +1,10 @@
 package org.example.base.domain.Helpers;
 
+import static org.example.base.domain.Enums.HandType.FOUR_KIND;
+import static org.example.base.domain.Enums.HandType.PAIR;
+import static org.example.base.domain.Enums.HandType.THREE_KIND;
+import static org.example.base.domain.Enums.HandType.TWO_PAIR;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,7 +15,6 @@ import lombok.val;
 import org.example.base.domain.Components.CardInput;
 import org.example.base.domain.Components.Hand;
 import org.example.base.domain.Enums.Card;
-import org.example.base.domain.Enums.CardType;
 import org.example.base.domain.Enums.HandType;
 import lombok.NonNull;
 
@@ -23,41 +27,25 @@ public class IdentifyHandUtil {
 
     public static Hand getPairHand(@NonNull List<Card> input) {
         verifyInput(input);
-        ArrayList<Card> singles = new ArrayList<>();
-        ArrayList<Card> duplicates = new ArrayList<>();
-        input.forEach(card -> {
-            if (singles.stream().anyMatch(single -> single.getValue().equals(card.getValue()))) {
-                duplicates.add(card);
-            } else {
-                singles.add(card);
-            }
-        });
-        if (duplicates.size() != 1) {
+        CardInput cardInput = new CardInput(input);
+        List<List<Card>> matches = cardInput.getPairs();
+        if (matches.size() != 1) {
             return null;
+        } else {
+            return getHand(PAIR, input, matches);
         }
-
-        CardType pairType = duplicates.get(0).getCardType();
-        List<Card> unpairedCards = input.stream().filter(card -> card.getCardType() != pairType).toList();
-        List<Card> pairedCards = input.stream().filter(card -> !unpairedCards.contains(card)).sorted().toList();
-        ArrayList<Card> result = new ArrayList<>();
-        result.addAll(pairedCards);
-        result.addAll(GeneralUtil.getHighestCards(unpairedCards, 3));
-        return new Hand(HandType.PAIR, result);
     }
 
     public static Hand getTwoPairHand(@NonNull List<Card> input) {
         verifyInput(input);
         CardInput cardInput = new CardInput(input);
-        List<List<Card>> pairs = cardInput.getPairs();
-        if (pairs.size() != 2 || !cardInput.getThreeOfAKinds().isEmpty()) {
+        List<List<Card>> matches = cardInput.getPairs();
+        if (matches.size() < 2) {
             return null;
+        } else if (matches.size() == 3) {
+            return getHand(TWO_PAIR, input, List.of(getCardsSorted(matches).subList(0, 4)));
         } else {
-            ArrayList<Card> allPairs = new ArrayList<>(pairs.stream().flatMap(Collection::stream).toList());
-            allPairs.sort(GeneralUtil.orderByValueDescThenSuit);
-            val singleCards = input.stream().filter(card -> !allPairs.contains(card)).toList();
-            val highCard = GeneralUtil.getHighestCards(singleCards, 1);
-            val result = Stream.concat(allPairs.stream(), highCard.stream()).toList();
-            return new Hand(HandType.TWO_PAIR, result);
+            return getHand(TWO_PAIR, input, matches);
         }
     }
 
@@ -65,14 +53,10 @@ public class IdentifyHandUtil {
         verifyInput(input);
         CardInput cardInput = new CardInput(input);
         List<List<Card>> threeKinds = cardInput.getThreeOfAKinds();
-        if (threeKinds.size() != 1 || !cardInput.getPairs().isEmpty() || !cardInput.getFourOfAKinds().isEmpty()) {
+        if (threeKinds.size() != 1) {
             return null;
         } else {
-            val allThreeKinds = new ArrayList<>(threeKinds.get(0));
-            val singleCards = input.stream().filter(card -> !allThreeKinds.contains(card)).toList();
-            val highCard = GeneralUtil.getHighestCards(singleCards, 2);
-            val result = Stream.concat(allThreeKinds.stream(), highCard.stream()).toList();
-            return new Hand(HandType.THREE_KIND, result);
+            return getHand(THREE_KIND, input, threeKinds);
         }
     }
 
@@ -83,12 +67,22 @@ public class IdentifyHandUtil {
         if (fourKinds.isEmpty()) {
             return null;
         } else {
-            val validCards = new ArrayList<>(fourKinds.get(0));
-            val singleCards = input.stream().filter(card -> !validCards.contains(card)).toList();
-            val highCard = GeneralUtil.getHighestCards(singleCards, 1);
-            val result = Stream.concat(validCards.stream(), highCard.stream()).toList();
-            return new Hand(HandType.FOUR_KIND, result);
+            return getHand(FOUR_KIND, input, fourKinds);
         }
+    }
+
+    private static Hand getHand(HandType handType, List<Card> input, List<List<Card>> matches) {
+        ArrayList<Card> allMatches = getCardsSorted(matches);
+        val singleCards = input.stream().filter(card -> !allMatches.contains(card)).toList();
+        val highestCards = GeneralUtil.getHighestCards(singleCards, 5 - allMatches.size());
+        val result = Stream.concat(allMatches.stream(), highestCards.stream()).toList();
+        return new Hand(handType, result);
+    }
+
+    private static ArrayList<Card> getCardsSorted(List<List<Card>> matches) {
+        ArrayList<Card> allMatches = new ArrayList<>(matches.stream().flatMap(Collection::stream).toList());
+        allMatches.sort(GeneralUtil.orderByValueDescThenSuit);
+        return allMatches;
     }
 
     protected static void verifyInput(@NonNull List<Card> input) {
