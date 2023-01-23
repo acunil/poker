@@ -31,6 +31,8 @@ class IdentifyHandUtilTest {
     public static final String THREE_KIND_OUTPUT = "9S,9C,9H,AD,KH";
     public static final String FOUR_KIND_INPUT = "AH,9H,9C,4C,9S,8D,9D";
     public static final String FOUR_KIND_OUTPUT = "9S,9C,9H,9D,AH";
+    public static final String FULL_HOUSE_INPUT = "4H,5D,7D,4S,JH,JC,4D";
+    public static final String FULL_HOUSE_OUTPUT = "4S,4H,4D,JC,JH";
 
     @Test
     void getHighCardHand() {
@@ -136,6 +138,49 @@ class IdentifyHandUtilTest {
     void getFourOfAKindHand_givenNotExactlyFourOfAKind_ReturnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getFourOfAKindHand(cards)).isNull();
+    }
+
+    @Test
+    void getFullHouseHand() {
+        List<Card> input = getCardsFromLabel(FULL_HOUSE_INPUT);
+        List<Card> expected = getCardsFromLabel(FULL_HOUSE_OUTPUT);
+        Hand result = IdentifyHandUtil.getFullHouseHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.FULL_HOUSE);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @Test
+    void getFullHouseHand_givenTwoThreeOfAKinds_returnsHigherTripsFullOfLower() {
+        List<Card> input = getCardsFromLabel("TS,4H,4D,TC,9D,4S,TD");
+        List<Card> expected = getCardsFromLabel("TS,TC,TD,4S,4H");
+        Hand result = IdentifyHandUtil.getFullHouseHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.FULL_HOUSE);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @Test
+    void getFullHouseHand_givenThreeOfAKindAndTwoPairs_returnsTripsFullOfHigherPair() {
+        List<Card> input = getCardsFromLabel("TS,4H,4D,TC,9D,9S,TD");
+        List<Card> expected = getCardsFromLabel("TS,TC,TD,9S,9D");
+        Hand result = IdentifyHandUtil.getFullHouseHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.FULL_HOUSE);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            TWO_PAIR_INPUT,
+            PAIR_INPUT,
+            HIGH_CARD_INPUT,
+            THREE_KIND_INPUT,
+            FOUR_KIND_INPUT
+    })
+    void getFullHouseHand_givenNotExactlyFullHouse_ReturnsNull(String input) {
+        List<Card> cards = getCardsFromLabel(input);
+        assertThat(IdentifyHandUtil.getFullHouseHand(cards)).isNull();
     }
 
     @Test
