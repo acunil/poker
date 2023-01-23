@@ -106,6 +106,20 @@ public class IdentifyHandUtil {
         }
     }
 
+    public static Hand getFlushHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        CardInput cardInput = new CardInput(input);
+        val flushes = cardInput.getFilteredSuits().stream()
+                .filter(matches -> matches.size() >= 5)
+                .toList();
+        if (flushes.isEmpty()) {
+            return null;
+        }
+        ArrayList<Card> flush = new ArrayList<>(flushes.get(0));
+        flush.sort(orderByValueDescThenSuit);
+        return new Hand(FLUSH, flush.subList(0, 5));
+    }
+
     private static Hand getHand(HandType handType, List<Card> input, List<List<Card>> matches) {
         ArrayList<Card> allMatches = getCardsSorted(matches);
         val singleCards = input.stream().filter(card -> !allMatches.contains(card)).toList();

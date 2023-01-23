@@ -33,6 +33,8 @@ class IdentifyHandUtilTest {
     public static final String FOUR_KIND_OUTPUT = "9S,9C,9H,9D,AH";
     public static final String FULL_HOUSE_INPUT = "4H,5D,7D,4S,JH,JC,4D";
     public static final String FULL_HOUSE_OUTPUT = "4S,4H,4D,JC,JH";
+    public static final String FLUSH_INPUT = "5D,KD,AS,JD,3D,9H,7D";
+    public static final String FLUSH_OUTPUT = "KD,JD,7D,5D,3D";
 
     @Test
     void getHighCardHand() {
@@ -59,7 +61,7 @@ class IdentifyHandUtilTest {
             HIGH_CARD_INPUT,
             FOUR_KIND_INPUT
     })
-    void getPairHand_givenNotExactlyPair_returnsNull(String input) {
+    void getPairHand_givenNoPresentPair_returnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getPairHand(cards)).isNull();
     }
@@ -91,7 +93,7 @@ class IdentifyHandUtilTest {
             HIGH_CARD_INPUT,
             FOUR_KIND_INPUT
     })
-    void getTwoPairHand_givenNotExactlyTwoPair_returnsNull(String input) {
+    void getTwoPairHand_givenNoPresentTwoPair_returnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getTwoPairHand(cards)).isNull();
     }
@@ -113,7 +115,7 @@ class IdentifyHandUtilTest {
             HIGH_CARD_INPUT,
             FOUR_KIND_INPUT
     })
-    void getThreeOfAKindHand_givenNotExactlyThreeOfAKind_ReturnsNull(String input) {
+    void getThreeOfAKindHand_givenNoPresentThreeOfAKind_ReturnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getThreeOfAKindHand(cards)).isNull();
     }
@@ -135,7 +137,7 @@ class IdentifyHandUtilTest {
             HIGH_CARD_INPUT,
             THREE_KIND_INPUT
     })
-    void getFourOfAKindHand_givenNotExactlyFourOfAKind_ReturnsNull(String input) {
+    void getFourOfAKindHand_givenNoPresentFourOfAKind_ReturnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getFourOfAKindHand(cards)).isNull();
     }
@@ -178,9 +180,43 @@ class IdentifyHandUtilTest {
             THREE_KIND_INPUT,
             FOUR_KIND_INPUT
     })
-    void getFullHouseHand_givenNotExactlyFullHouse_ReturnsNull(String input) {
+    void getFullHouseHand_givenNoPresentFullHouse_ReturnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getFullHouseHand(cards)).isNull();
+    }
+
+    @Test
+    void getFlushHand() {
+        List<Card> input = getCardsFromLabel(FLUSH_INPUT);
+        List<Card> expected = getCardsFromLabel(FLUSH_OUTPUT);
+        Hand result = IdentifyHandUtil.getFlushHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.FLUSH);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @Test
+    void getFlushHand_givenMoreThanFiveSameSuitCards_returnsHighestFlush() {
+        List<Card> input = getCardsFromLabel("5H,4H,KH,JH,7H,TH,9D");
+        List<Card> expected = getCardsFromLabel("KH,JH,TH,7H,5H");
+        Hand result = IdentifyHandUtil.getFlushHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.FLUSH);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            TWO_PAIR_INPUT,
+            PAIR_INPUT,
+            HIGH_CARD_INPUT,
+            THREE_KIND_INPUT,
+            FOUR_KIND_INPUT,
+            FULL_HOUSE_INPUT
+    })
+    void getFlushHand_givenNoPresentFlush_ReturnsNull(String input) {
+        List<Card> cards = getCardsFromLabel(input);
+        assertThat(IdentifyHandUtil.getFlushHand(cards)).isNull();
     }
 
     @Test
