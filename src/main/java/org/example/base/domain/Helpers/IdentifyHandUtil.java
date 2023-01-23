@@ -1,10 +1,5 @@
 package org.example.base.domain.Helpers;
 
-import static org.example.base.domain.Enums.HandType.FOUR_KIND;
-import static org.example.base.domain.Enums.HandType.PAIR;
-import static org.example.base.domain.Enums.HandType.THREE_KIND;
-import static org.example.base.domain.Enums.HandType.TWO_PAIR;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,6 +12,9 @@ import org.example.base.domain.Components.Hand;
 import org.example.base.domain.Enums.Card;
 import org.example.base.domain.Enums.HandType;
 import lombok.NonNull;
+
+import static org.example.base.domain.Enums.HandType.*;
+import static org.example.base.domain.Helpers.GeneralUtil.orderByValueDescThenSuit;
 
 public class IdentifyHandUtil {
 
@@ -71,6 +69,43 @@ public class IdentifyHandUtil {
         }
     }
 
+    public static Hand getFullHouseHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        CardInput cardInput = new CardInput(input);
+        val threeKinds = cardInput.getThreeOfAKinds();
+        if (threeKinds.isEmpty()) {
+            return null;
+        }
+        val fullHouse = new ArrayList<Card>();
+        val pairs = cardInput.getPairs();
+        if (!pairs.isEmpty()) {
+                fullHouse.addAll(threeKinds.get(0).stream().sorted(orderByValueDescThenSuit).toList());
+            if (pairs.size() == 1) {
+                fullHouse.addAll(3, pairs.get(0).stream().sorted(orderByValueDescThenSuit).toList());
+            } else {
+                ArrayList<Card> flattenedPairs = new ArrayList<>();
+                flattenedPairs.addAll(pairs.get(0));
+                flattenedPairs.addAll(pairs.get(1));
+                flattenedPairs.sort(orderByValueDescThenSuit);
+                fullHouse.addAll(3, flattenedPairs.subList(0, 2));
+            }
+        }
+
+        if (threeKinds.size() == 2) {
+            ArrayList<Card> flattenedThreeKinds = new ArrayList<>();
+            flattenedThreeKinds.addAll(threeKinds.get(0));
+            flattenedThreeKinds.addAll(threeKinds.get(1));
+            flattenedThreeKinds.sort(orderByValueDescThenSuit);
+            fullHouse.addAll(flattenedThreeKinds.subList(0, 5));
+        }
+
+        if (fullHouse.isEmpty()) {
+            return null;
+        } else {
+            return new Hand(FULL_HOUSE, fullHouse);
+        }
+    }
+
     private static Hand getHand(HandType handType, List<Card> input, List<List<Card>> matches) {
         ArrayList<Card> allMatches = getCardsSorted(matches);
         val singleCards = input.stream().filter(card -> !allMatches.contains(card)).toList();
@@ -81,7 +116,7 @@ public class IdentifyHandUtil {
 
     private static ArrayList<Card> getCardsSorted(List<List<Card>> matches) {
         ArrayList<Card> allMatches = new ArrayList<>(matches.stream().flatMap(Collection::stream).toList());
-        allMatches.sort(GeneralUtil.orderByValueDescThenSuit);
+        allMatches.sort(orderByValueDescThenSuit);
         return allMatches;
     }
 
