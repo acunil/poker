@@ -35,6 +35,8 @@ class IdentifyHandUtilTest {
     public static final String FULL_HOUSE_OUTPUT = "4S,4H,4D,JC,JH";
     public static final String FLUSH_INPUT = "5D,KD,AS,JD,3D,9H,7D";
     public static final String FLUSH_OUTPUT = "KD,JD,7D,5D,3D";
+    public static final String STRAIGHT_INPUT = "8D,TH,7S,2H,KC,9C,6H";
+    public static final String STRAIGHT_OUTPUT = "TH,9C,8D,7S,6H";
 
     @Test
     void getHighCardHand() {
@@ -217,6 +219,71 @@ class IdentifyHandUtilTest {
     void getFlushHand_givenNoPresentFlush_ReturnsNull(String input) {
         List<Card> cards = getCardsFromLabel(input);
         assertThat(IdentifyHandUtil.getFlushHand(cards)).isNull();
+    }
+
+    @Test
+    void getStraightHand() {
+        List<Card> input = getCardsFromLabel(STRAIGHT_INPUT);
+        List<Card> expected = getCardsFromLabel(STRAIGHT_OUTPUT);
+        Hand result = IdentifyHandUtil.getStraightHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.STRAIGHT);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @Test
+    void getStraightHand_givenMoreThanFiveStraightCards_returnsHighestStraight() {
+        List<Card> input = getCardsFromLabel("4H,6D,5S,3C,8C,7H,9C");
+        List<Card> expected = getCardsFromLabel("9C,8C,7H,6D,5S");
+        Hand result = IdentifyHandUtil.getStraightHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.STRAIGHT);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @Test
+    void getStraightHand_givenAceToFiveStraight_returnsFiveHighStraight() {
+        List<Card> input = getCardsFromLabel("AC,5S,4H,9D,KS,3D,2H");
+        List<Card> expected = getCardsFromLabel("5S,4H,3D,2H,AC");
+        Hand result = IdentifyHandUtil.getStraightHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.STRAIGHT);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @Test
+    void getStraightHand_givenRoyalStraight_returnsAceHighStraight() {
+        List<Card> input = getCardsFromLabel("AC,8S,4H,TD,KS,QH,JH");
+        List<Card> expected = getCardsFromLabel("AC,KS,QH,JH,TD");
+        Hand result = IdentifyHandUtil.getStraightHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.STRAIGHT);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @Test
+    void getStraightHand_givenStraightAndPairs_returnsStraightPrioritizedBySuit() {
+        List<Card> input = getCardsFromLabel("2H,3S,4C,4D,5S,6D,6S");
+        List<Card> expected = getCardsFromLabel("6S,5S,4C,3S,2H");
+        Hand result = IdentifyHandUtil.getStraightHand(input);
+        assertThat(result).isNotNull();
+        assertThat(result.getHandType()).isEqualTo(HandType.STRAIGHT);
+        assertThat(result.getCards()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            TWO_PAIR_INPUT,
+            PAIR_INPUT,
+            HIGH_CARD_INPUT,
+            THREE_KIND_INPUT,
+            FOUR_KIND_INPUT,
+            FULL_HOUSE_INPUT,
+            "JD,QS,KH,AC,2D,3H,4D"
+    })
+    void getStraightHand_givenNoPresentStraight_ReturnsNull(String input) {
+        List<Card> cards = getCardsFromLabel(input);
+        assertThat(IdentifyHandUtil.getStraightHand(cards)).isNull();
     }
 
     @Test

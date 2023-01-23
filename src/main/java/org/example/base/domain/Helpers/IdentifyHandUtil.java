@@ -2,14 +2,18 @@ package org.example.base.domain.Helpers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lombok.val;
 import org.example.base.domain.Components.CardInput;
 import org.example.base.domain.Components.Hand;
 import org.example.base.domain.Enums.Card;
+import org.example.base.domain.Enums.CardType;
 import org.example.base.domain.Enums.HandType;
 import lombok.NonNull;
 
@@ -118,6 +122,44 @@ public class IdentifyHandUtil {
         ArrayList<Card> flush = new ArrayList<>(flushes.get(0));
         flush.sort(orderByValueDescThenSuit);
         return new Hand(FLUSH, flush.subList(0, 5));
+    }
+
+    public static Hand getStraightHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        ArrayList<Integer> values = new ArrayList<>(input.stream()
+                .map(Card::getValue)
+                .collect(Collectors.toSet())
+                .stream()
+                .sorted(Comparator.reverseOrder())
+                .toList());
+        if (values.size() < 5) {
+            return null;
+        }
+        if (input.stream().anyMatch(card -> CardType.ACE.equals(card.getCardType()))) {
+            values.add(1);
+        }
+
+        ArrayList<Integer> validStraightValues = new ArrayList<>();
+        for (int i = 0; i < values.size() - 4; i++) {
+            boolean fiveConsecutive = values.get(i) == values.get(i + 4) + 4;
+            if (fiveConsecutive) {
+                validStraightValues.addAll(values.subList(i, i + 5));
+                break;
+            }
+        }
+        if (validStraightValues.size() != 5) {
+            return null;
+        }
+
+        ArrayList<Card> straight = new ArrayList<>();
+        List<Card> inputSorted = input.stream().sorted(orderByValueDescThenSuit).toList();
+        for (Integer value : validStraightValues) {
+            Integer actualValue = value == 1 ? 14 : value;
+            Optional<Card> match = inputSorted.stream().filter(card -> card.getValue().equals(actualValue)).findFirst();
+            straight.add(match.get());
+        }
+
+        return new Hand(STRAIGHT, straight);
     }
 
     private static Hand getHand(HandType handType, List<Card> input, List<List<Card>> matches) {
