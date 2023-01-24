@@ -10,11 +10,13 @@ import static org.example.base.domain.Enums.Card.KING_SPADES;
 import static org.example.base.domain.Enums.Card.TWO_CLUBS;
 import static org.example.base.domain.Helpers.GeneralUtil.getCardsFromLabel;
 
+import lombok.val;
 import org.example.base.domain.Components.Hand;
 import org.example.base.domain.Enums.Card;
 import org.example.base.domain.Enums.HandType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -356,5 +358,25 @@ class IdentifyHandUtilTest {
         assertThatThrownBy(() -> IdentifyHandUtil.verifyInput(List.of(EIGHT_DIAMONDS, EIGHT_DIAMONDS, FIVE_CLUBS, JACK_SPADES, ACE_SPADES, TWO_CLUBS, KING_SPADES)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Cards input must all be unique: 8D,8D,5C,JS,AS,2C,KS");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "JH,5D,4C,8C,9H,AS,3D:AS,JH,9H,8C,5D:HIGH_CARD",
+        "JH,5D,4C,8C,9H,AS,4D:4C,4D,AS,JH,9H:PAIR",
+        "JH,5D,4C,8C,5H,AS,4D:5H,5D,4C,4D,AS:TWO_PAIR",
+        "JH,4S,4C,8C,5H,AS,4D:4S,4C,4D,AS,JH:THREE_KIND",
+        "5H,5D,6S,3C,4D,6H,7D:7D,6S,5H,4D,3C:STRAIGHT",
+        "AC,5S,4C,7S,KS,AS,9S:AS,KS,9S,7S,5S:FLUSH",
+        "JH,4S,4C,JC,JS,AS,4D:JS,JC,JH,4S,4C:FULL_HOUSE",
+        "KH,KD,KS,KC,AC,AD,AS:KS,KC,KH,KD,AS:FOUR_KIND",
+        "TD,9D,8D,7D,6D,5D,4D:TD,9D,8D,7D,6D:STRAIGHT_FLUSH",
+        "TH,JH,QH,KH,AH,AD,AS:AH,KH,QH,JH,TH:ROYAL_FLUSH"
+        }, delimiter = ':')
+    void getBestHand(String input, String expectedHandCards, HandType expectedHandType) {
+        val result = IdentifyHandUtil.getBestHand(getCardsFromLabel(input));
+        val expectedCards = GeneralUtil.getCardsFromLabel(expectedHandCards);
+        assertThat(result.getCards()).isEqualTo(expectedCards);
+        assertThat(result.getHandType()).isEqualTo(expectedHandType);
     }
 }

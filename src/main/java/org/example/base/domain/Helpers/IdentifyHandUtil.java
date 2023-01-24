@@ -24,6 +24,43 @@ public class IdentifyHandUtil {
 
     /* HANDS */
 
+    public static Hand getBestHand(List<Card> input) {
+        Hand bestHand = getStraightFlushHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        bestHand = getFourOfAKindHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        bestHand = getFullHouseHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        bestHand = getFlushHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        bestHand = getStraightHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        bestHand = getThreeOfAKindHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        bestHand = getTwoPairHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        bestHand = getPairHand(input);
+        if (bestHand != null) {
+            return bestHand;
+        }
+        return getHighCardHand(input);
+    }
+
+
     public static Hand getHighCardHand(List<Card> input) {
         verifyInput(input);
         return new Hand(HandType.HIGH_CARD, GeneralUtil.getHighestCards(input, 5));
