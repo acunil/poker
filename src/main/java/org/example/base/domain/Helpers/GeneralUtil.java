@@ -27,10 +27,9 @@ public class GeneralUtil {
     }
 
     protected static List<Card> orderCardsByValue(List<Card> input) {
-        val list = new ArrayList<>(input.stream().sorted(Card::compare).toList());
-        ArrayList<Card> reversed = new ArrayList<>();
-        list.forEach(card -> reversed.add(0, card));
-        return reversed;
+        val arrayList = new ArrayList<>(input);
+        arrayList.sort(orderByValueDescThenSuit);
+        return arrayList;
     }
 
     public static List<Card> getCardsFromLabel(String label) {
