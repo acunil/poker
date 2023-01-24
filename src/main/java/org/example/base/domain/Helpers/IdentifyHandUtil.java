@@ -22,6 +22,8 @@ import static org.example.base.domain.Helpers.GeneralUtil.orderByValueDescThenSu
 
 public class IdentifyHandUtil {
 
+    /* HANDS */
+
     public static Hand getHighCardHand(List<Card> input) {
         verifyInput(input);
         return new Hand(HandType.HIGH_CARD, GeneralUtil.getHighestCards(input, 5));
@@ -112,6 +114,41 @@ public class IdentifyHandUtil {
 
     public static Hand getFlushHand(@NonNull List<Card> input) {
         verifyInput(input);
+        ArrayList<Card> suited = getSuited(input);
+        if (suited == null) {
+            return null;
+        }
+        return new Hand(FLUSH, suited.subList(0, 5));
+    }
+
+    public static Hand getStraightHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        ArrayList<Card> straight = getStraight(input);
+        if (straight == null) return null;
+
+        return new Hand(STRAIGHT, straight);
+    }
+
+    public static Hand getStraightFlushHand(@NonNull List<Card> input) {
+        verifyInput(input);
+        ArrayList<Card> suited = getSuited(input);
+        if (suited == null) {
+            return null;
+        }
+        val straightFlush = getStraight(suited);
+        if (straightFlush == null) {
+            return null;
+        } else if (straightFlush.stream().anyMatch(card -> card.getCardType().equals(CardType.ACE)
+                && straightFlush.stream().anyMatch(card1 -> card1.getCardType().equals(CardType.KING)))) {
+            return new Hand(ROYAL_FLUSH, straightFlush);
+        } else {
+            return new Hand(STRAIGHT_FLUSH, straightFlush);
+        }
+    }
+
+    /* HELPERS */
+
+    private static ArrayList<Card> getSuited(List<Card> input) {
         CardInput cardInput = new CardInput(input);
         val flushes = cardInput.getFilteredSuits().stream()
                 .filter(matches -> matches.size() >= 5)
@@ -119,13 +156,12 @@ public class IdentifyHandUtil {
         if (flushes.isEmpty()) {
             return null;
         }
-        ArrayList<Card> flush = new ArrayList<>(flushes.get(0));
-        flush.sort(orderByValueDescThenSuit);
-        return new Hand(FLUSH, flush.subList(0, 5));
+        ArrayList<Card> suited = new ArrayList<>(flushes.get(0));
+        suited.sort(orderByValueDescThenSuit);
+        return suited;
     }
 
-    public static Hand getStraightHand(@NonNull List<Card> input) {
-        verifyInput(input);
+    private static ArrayList<Card> getStraight(List<Card> input) {
         ArrayList<Integer> values = new ArrayList<>(input.stream()
                 .map(Card::getValue)
                 .collect(Collectors.toSet())
@@ -158,8 +194,7 @@ public class IdentifyHandUtil {
             Optional<Card> match = inputSorted.stream().filter(card -> card.getValue().equals(actualValue)).findFirst();
             straight.add(match.get());
         }
-
-        return new Hand(STRAIGHT, straight);
+        return straight;
     }
 
     private static Hand getHand(HandType handType, List<Card> input, List<List<Card>> matches) {
