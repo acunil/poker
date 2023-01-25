@@ -229,6 +229,7 @@ public class IdentifyHandUtil {
         for (Integer value : validStraightValues) {
             Integer actualValue = value == 1 ? 14 : value;
             Optional<Card> match = inputSorted.stream().filter(card -> card.getValue().equals(actualValue)).findFirst();
+            //noinspection OptionalGetWithoutIsPresent
             straight.add(match.get());
         }
         return straight;
