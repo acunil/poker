@@ -60,6 +60,11 @@ public class IdentifyHandUtil {
         return getHighCardHand(input);
     }
 
+    public static Hand getBestHand(String input) {
+        return getBestHand(GeneralUtil.getCardsFromLabel(input));
+    }
+
+
 
     public static Hand getHighCardHand(List<Card> input) {
         verifyInput(input);
