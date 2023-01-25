@@ -1,16 +1,16 @@
-package org.example.base.domain.Components;
+package org.example.base.domain.components;
 
-import static org.example.base.domain.Enums.CardType.*;
-import static org.example.base.domain.Enums.Suit.*;
+import static org.example.base.domain.enums.CardType.*;
+import static org.example.base.domain.enums.Suit.*;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
 import lombok.RequiredArgsConstructor;
-import org.example.base.domain.Enums.Card;
-import org.example.base.domain.Enums.CardType;
-import org.example.base.domain.Enums.Suit;
+import org.example.base.domain.enums.Card;
+import org.example.base.domain.enums.CardType;
+import org.example.base.domain.enums.Suit;
 
 @RequiredArgsConstructor
 public class CardInput {

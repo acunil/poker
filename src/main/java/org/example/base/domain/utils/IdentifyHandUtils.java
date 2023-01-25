@@ -1,26 +1,29 @@
-package org.example.base.domain.Helpers;
+package org.example.base.domain.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lombok.val;
-import org.example.base.domain.Components.CardInput;
-import org.example.base.domain.Components.Hand;
-import org.example.base.domain.Enums.Card;
-import org.example.base.domain.Enums.CardType;
-import org.example.base.domain.Enums.HandType;
+import org.example.base.domain.components.CardInput;
+import org.example.base.domain.components.Hand;
+import org.example.base.domain.enums.Card;
+import org.example.base.domain.enums.CardType;
+import org.example.base.domain.enums.HandType;
 import lombok.NonNull;
 
-import static org.example.base.domain.Enums.HandType.*;
-import static org.example.base.domain.Helpers.GeneralUtil.orderByValueDescThenSuit;
+import static org.example.base.domain.enums.HandType.*;
+import static org.example.base.domain.utils.GeneralUtils.ORDER_BY_VALUE_DESC_THEN_SUIT;
 
-public class IdentifyHandUtil {
+public class IdentifyHandUtils {
+
+    private IdentifyHandUtils() {
+        throw new IllegalStateException("IdentifyHandUtils is a static class");
+    }
 
     /* HANDS */
 
@@ -61,14 +64,14 @@ public class IdentifyHandUtil {
     }
 
     public static Hand getBestHand(String input) {
-        return getBestHand(GeneralUtil.getCardsFromLabel(input));
+        return getBestHand(GeneralUtils.getCardsFromLabel(input));
     }
 
 
 
     public static Hand getHighCardHand(List<Card> input) {
         verifyInput(input);
-        return new Hand(HandType.HIGH_CARD, GeneralUtil.getHighestCards(input, 5));
+        return new Hand(HandType.HIGH_CARD, GeneralUtils.getHighestCards(input, 5));
     }
 
     public static Hand getPairHand(@NonNull List<Card> input) {
@@ -127,14 +130,14 @@ public class IdentifyHandUtil {
         val fullHouse = new ArrayList<Card>();
         val pairs = cardInput.getPairs();
         if (!pairs.isEmpty()) {
-                fullHouse.addAll(threeKinds.get(0).stream().sorted(orderByValueDescThenSuit).toList());
+                fullHouse.addAll(threeKinds.get(0).stream().sorted(ORDER_BY_VALUE_DESC_THEN_SUIT).toList());
             if (pairs.size() == 1) {
-                fullHouse.addAll(3, pairs.get(0).stream().sorted(orderByValueDescThenSuit).toList());
+                fullHouse.addAll(3, pairs.get(0).stream().sorted(ORDER_BY_VALUE_DESC_THEN_SUIT).toList());
             } else {
                 ArrayList<Card> flattenedPairs = new ArrayList<>();
                 flattenedPairs.addAll(pairs.get(0));
                 flattenedPairs.addAll(pairs.get(1));
-                flattenedPairs.sort(orderByValueDescThenSuit);
+                flattenedPairs.sort(ORDER_BY_VALUE_DESC_THEN_SUIT);
                 fullHouse.addAll(3, flattenedPairs.subList(0, 2));
             }
         }
@@ -143,7 +146,7 @@ public class IdentifyHandUtil {
             ArrayList<Card> flattenedThreeKinds = new ArrayList<>();
             flattenedThreeKinds.addAll(threeKinds.get(0));
             flattenedThreeKinds.addAll(threeKinds.get(1));
-            flattenedThreeKinds.sort(orderByValueDescThenSuit);
+            flattenedThreeKinds.sort(ORDER_BY_VALUE_DESC_THEN_SUIT);
             fullHouse.addAll(flattenedThreeKinds.subList(0, 5));
         }
 
@@ -157,7 +160,7 @@ public class IdentifyHandUtil {
     public static Hand getFlushHand(@NonNull List<Card> input) {
         verifyInput(input);
         ArrayList<Card> suited = getSuited(input);
-        if (suited == null) {
+        if (suited.isEmpty()) {
             return null;
         }
         return new Hand(FLUSH, suited.subList(0, 5));
@@ -166,19 +169,20 @@ public class IdentifyHandUtil {
     public static Hand getStraightHand(@NonNull List<Card> input) {
         verifyInput(input);
         ArrayList<Card> straight = getStraight(input);
-        if (straight == null) return null;
-
+        if (straight.isEmpty()) {
+            return null;
+        }
         return new Hand(STRAIGHT, straight);
     }
 
     public static Hand getStraightFlushHand(@NonNull List<Card> input) {
         verifyInput(input);
         ArrayList<Card> suited = getSuited(input);
-        if (suited == null) {
+        if (suited.isEmpty()) {
             return null;
         }
         val straightFlush = getStraight(suited);
-        if (straightFlush == null) {
+        if (straightFlush.isEmpty()) {
             return null;
         } else if (straightFlush.stream().anyMatch(card -> card.getCardType().equals(CardType.ACE)
                 && straightFlush.stream().anyMatch(card1 -> card1.getCardType().equals(CardType.KING)))) {
@@ -196,10 +200,10 @@ public class IdentifyHandUtil {
                 .filter(matches -> matches.size() >= 5)
                 .toList();
         if (flushes.isEmpty()) {
-            return null;
+            return new ArrayList<>();
         }
         ArrayList<Card> suited = new ArrayList<>(flushes.get(0));
-        suited.sort(orderByValueDescThenSuit);
+        suited.sort(ORDER_BY_VALUE_DESC_THEN_SUIT);
         return suited;
     }
 
@@ -211,7 +215,7 @@ public class IdentifyHandUtil {
                 .sorted(Comparator.reverseOrder())
                 .toList());
         if (values.size() < 5) {
-            return null;
+            return new ArrayList<>();
         }
         if (input.stream().anyMatch(card -> CardType.ACE.equals(card.getCardType()))) {
             values.add(1);
@@ -226,16 +230,18 @@ public class IdentifyHandUtil {
             }
         }
         if (validStraightValues.size() != 5) {
-            return null;
+            return new ArrayList<>();
         }
 
         ArrayList<Card> straight = new ArrayList<>();
-        List<Card> inputSorted = input.stream().sorted(orderByValueDescThenSuit).toList();
+        List<Card> inputSorted = input.stream().sorted(ORDER_BY_VALUE_DESC_THEN_SUIT).toList();
         for (Integer value : validStraightValues) {
             Integer actualValue = value == 1 ? 14 : value;
-            Optional<Card> match = inputSorted.stream().filter(card -> card.getValue().equals(actualValue)).findFirst();
-            //noinspection OptionalGetWithoutIsPresent
-            straight.add(match.get());
+            Card match = inputSorted.stream().filter(card -> card.getValue().equals(actualValue))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Unexpectedly no match found by getStraight: "
+                            + GeneralUtils.getLabelFromCards(inputSorted)));
+            straight.add(match);
         }
         return straight;
     }
@@ -243,23 +249,23 @@ public class IdentifyHandUtil {
     private static Hand getHand(HandType handType, List<Card> input, List<List<Card>> matches) {
         ArrayList<Card> allMatches = getCardsSorted(matches);
         val singleCards = input.stream().filter(card -> !allMatches.contains(card)).toList();
-        val highestCards = GeneralUtil.getHighestCards(singleCards, 5 - allMatches.size());
+        val highestCards = GeneralUtils.getHighestCards(singleCards, 5 - allMatches.size());
         val result = Stream.concat(allMatches.stream(), highestCards.stream()).toList();
         return new Hand(handType, result);
     }
 
     private static ArrayList<Card> getCardsSorted(List<List<Card>> matches) {
         ArrayList<Card> allMatches = new ArrayList<>(matches.stream().flatMap(Collection::stream).toList());
-        allMatches.sort(orderByValueDescThenSuit);
+        allMatches.sort(ORDER_BY_VALUE_DESC_THEN_SUIT);
         return allMatches;
     }
 
     protected static void verifyInput(@NonNull List<Card> input) {
-        if (input.size() != GeneralUtil.HOLDEM_INPUT_SIZE) {
-            throw new IllegalArgumentException("Cards input size must be " + GeneralUtil.HOLDEM_INPUT_SIZE);
+        if (input.size() != GeneralUtils.HOLDEM_INPUT_SIZE) {
+            throw new IllegalArgumentException("Cards input size must be " + GeneralUtils.HOLDEM_INPUT_SIZE);
         }
         if (new HashSet<>(input).size() != 7) {
-            throw new IllegalArgumentException("Cards input must all be unique: " + GeneralUtil.getLabelFromCards(input));
+            throw new IllegalArgumentException("Cards input must all be unique: " + GeneralUtils.getLabelFromCards(input));
         }
     }
 

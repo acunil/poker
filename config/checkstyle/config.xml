@@ -31,7 +31,7 @@
         </module>
         <module name="AvoidStarImport">
             <property name="excludes"
-                      value="org.example.base.domain.Enums.Suit,org.example.base.domain.Enums.CardType"/>
+                      value="org.example.base.domain.enums.Suit,org.example.base.domain.enums.CardType"/>
         </module>
         <module name="RedundantImport">
             <property name="severity" value="error"/>

@@ -1,4 +1,4 @@
-package org.example.base.domain.Enums;
+package org.example.base.domain.enums;
 
 import java.util.Objects;
 

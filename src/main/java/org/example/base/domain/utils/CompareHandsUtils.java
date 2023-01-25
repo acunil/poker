@@ -1,11 +1,15 @@
-package org.example.base.domain.Helpers;
+package org.example.base.domain.utils;
 
-import org.example.base.domain.Components.Hand;
+import org.example.base.domain.components.Hand;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompareHandsUtil {
+public class CompareHandsUtils {
+
+    private CompareHandsUtils() {
+        throw new IllegalStateException("CompareHandsUtils is a static class");
+    }
 
     public static List<Hand> getWinningHands(List<Hand> hands) {
         ArrayList<Hand> winningHands = new ArrayList<>();

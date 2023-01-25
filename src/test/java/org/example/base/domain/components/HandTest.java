@@ -1,8 +1,8 @@
-package org.example.base.domain.Components;
+package org.example.base.domain.components;
 
 import lombok.val;
-import org.example.base.domain.Helpers.GeneralUtil;
-import org.example.base.domain.Helpers.IdentifyHandUtil;
+import org.example.base.domain.utils.GeneralUtils;
+import org.example.base.domain.utils.IdentifyHandUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class HandTest {
 
-    public static final Hand FULL_HOUSE_HAND = IdentifyHandUtil.getBestHand("KS,KC,KH,4H,4D,9S,TH");
-    public static final Hand PAIR_HAND = IdentifyHandUtil.getBestHand("AS,AC,4D,5C,7H,8S,KC");
+    public static final Hand FULL_HOUSE_HAND = IdentifyHandUtils.getBestHand("KS,KC,KH,4H,4D,9S,TH");
+    public static final Hand PAIR_HAND = IdentifyHandUtils.getBestHand("AS,AC,4D,5C,7H,8S,KC");
 
     @Test
     void compare_givenHandIsHigher_returns1() {
@@ -30,15 +30,15 @@ class HandTest {
 
     @Test
     void compare_givenHandHasIdenticalValues_returns0() {
-        Hand targetPairHand = IdentifyHandUtil.getBestHand("AH,AD,4D,5C,7H,8S,KC");
+        Hand targetPairHand = IdentifyHandUtils.getBestHand("AH,AD,4D,5C,7H,8S,KC");
         Integer result = PAIR_HAND.compare(targetPairHand);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isZero();
     }
 
     @Test
     void compare_givenHandHasIdenticalCards_returns0() {
         Integer result = PAIR_HAND.compare(PAIR_HAND);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isZero();
     }
 
     @ParameterizedTest
@@ -54,8 +54,8 @@ class HandTest {
         String targetHandInput,
         Integer expected
     ) {
-        Hand hand = IdentifyHandUtil.getBestHand(handInput);
-        Hand targetHand = IdentifyHandUtil.getBestHand(targetHandInput);
+        Hand hand = IdentifyHandUtils.getBestHand(handInput);
+        Hand targetHand = IdentifyHandUtils.getBestHand(targetHandInput);
         Integer result = hand.compare(targetHand);
         assertThat(result).isEqualTo(expected);
     }
@@ -69,7 +69,7 @@ class HandTest {
     }, delimiter = ':')
     void getUniqueValuesForComparison(String input, String expected) {
         val expectedValues = Arrays.stream(expected.split(",")).map(Integer::valueOf).toList();
-        Hand hand = IdentifyHandUtil.getBestHand(GeneralUtil.getCardsFromLabel(input));
+        Hand hand = IdentifyHandUtils.getBestHand(GeneralUtils.getCardsFromLabel(input));
         assertThat(hand.getUniqueValuesForComparison()).isEqualTo(expectedValues);
     }
 }

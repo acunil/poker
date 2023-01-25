@@ -1,4 +1,4 @@
-package org.example.base.domain.Enums;
+package org.example.base.domain.enums;
 
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public enum CardType {
     ACE("Ace",14, "A");
 
     @Getter
-    public final String name;
+    public final String title;
 
     @Getter
     public final Integer value;
@@ -32,7 +32,7 @@ public enum CardType {
 
     @Override
     public String toString() {
-        return name;
+        return title;
     }
 
     public static CardType fromLabel(String label) {
@@ -44,7 +44,4 @@ public enum CardType {
         return null;
     }
 
-    public Integer compare(CardType target) {
-        return value.compareTo(target.getValue());
-    }
 }
