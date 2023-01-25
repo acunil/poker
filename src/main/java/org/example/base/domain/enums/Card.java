@@ -1,12 +1,13 @@
-package org.example.base.domain.Enums;
+package org.example.base.domain.enums;
 
-import static org.example.base.domain.Enums.CardType.*;
-import static org.example.base.domain.Enums.Suit.*;
+import static org.example.base.domain.enums.CardType.*;
+import static org.example.base.domain.enums.Suit.*;
 
 import java.util.Objects;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.example.base.data.Labels;
 
 @RequiredArgsConstructor
 public enum Card {
@@ -106,12 +107,14 @@ public enum Card {
     }
 
     public static Card fromLabel(String label) {
-        for (Card card : Card.values()) {
-            if (Objects.equals(card.getLabel(), label)) {
-                return card;
+        if (Labels.isValid(label)) {
+            for (Card card : Card.values()) {
+                if (Objects.equals(card.getLabel(), label)) {
+                    return card;
+                }
             }
         }
-        return null;
+        throw new IllegalArgumentException("Invalid card label: " + label);
     }
     
 }

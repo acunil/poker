@@ -1,11 +1,11 @@
-package org.example.base.domain.Components;
+package org.example.base.domain.components;
 
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.example.base.domain.Enums.Card;
-import org.example.base.domain.Enums.HandType;
+import org.example.base.domain.enums.Card;
+import org.example.base.domain.enums.HandType;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

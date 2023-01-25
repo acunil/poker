@@ -1,6 +1,6 @@
-package org.example.base.domain.Components;
+package org.example.base.domain.components;
 
-import org.example.base.domain.Enums.Card;
+import org.example.base.domain.enums.Card;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package org.example.base.domain.Enums;
+package org.example.base.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
