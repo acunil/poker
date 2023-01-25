@@ -114,7 +114,7 @@ public enum Card {
                 }
             }
         }
-        throw new IllegalArgumentException("Invalid card label: " + label);
+        throw new IllegalArgumentException(String.format("Invalid card label: \"%s\"", label));
     }
     
 }

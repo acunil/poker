@@ -28,7 +28,7 @@ import org.example.base.domain.enums.CardType;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
@@ -85,11 +85,16 @@ class GeneralUtilsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"9c,5D", "AC, 6S", "kC,AD", "GG,5H,4D"})
-    void getCardsFromLabel_throwsException(String label) {
+    @CsvSource(value = {
+            "9c,5D:\"9c\"",
+            "AC, 6S:\" 6S\"",
+            "kC,AD:\"kC\"",
+            "GG,5H,4D:\"GG\""
+    }, delimiter = ':')
+    void getCardsFromLabel_throwsException(String label, String invalid) {
         assertThatThrownBy(() -> GeneralUtils.getCardsFromLabel(label))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Invalid card label: " + label);
+                .hasMessage("Invalid card label: " + invalid );
     }
 
 }
