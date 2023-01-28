@@ -10,9 +10,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 class RoundTest {
 
+    public static final String PRE_FLOP_REGEX =
+        "Player: Red \\| Position: 0 \\| Chips: 100 \\| Pocket: \\w\\w,\\w\\w\\n"
+            + "Player: Blue \\| Position: 1 \\| Chips: 150 \\| Pocket: \\w\\w,\\w\\w\\n";
+    public static final String FLOP_REGEX = "Flop: \\w\\w,\\w\\w,\\w\\w\\n";
+    public static final String TURN_REGEX = "Turn: \\w\\w\\n";
+    public static final String RIVER_REGEX = "River: \\w\\w\\n";
     Round round;
     Player player1;
     Player player2;
@@ -29,7 +34,7 @@ class RoundTest {
     @Test
     void dealPocketCards_setsDeckToFullDeck() {
         String shuffledDeckLabel = GeneralUtils.getLabelFromCards(round.getDeck());
-        assertThat(shuffledDeckLabel).hasSize(3 * 52 - 1);
+        assertThat(shuffledDeckLabel).hasSize(3 * 52 - 1); // 52 cards formatted "XY," less the final ','
     }
 
     @Test
@@ -42,10 +47,43 @@ class RoundTest {
 
     @Test
     void dealPocketCards_logsCardsDealt() {
-        String regex = "Player: Red \\| Position: 0 \\| Chips: 100 \\| Pocket: \\w\\w,\\w\\w\\n"
-                + "Player: Blue \\| Position: 1 \\| Chips: 150 \\| Pocket: \\w\\w,\\w\\w\\n";
-        assertThat(round.getRoundLog()).matches(regex);
+        assertThat(round.getRoundLog()).hasSize(1);
+        assertThat(round.getRoundLog().get(0)).matches(PRE_FLOP_REGEX);
     }
+
+    @Test
+    void dealFlop_logsCardsDealt() {
+        round.dealFlop();
+        assertThat(round.getRoundLog()).hasSize(2);
+        assertThat(round.getRoundLog().get(1)).matches(FLOP_REGEX);
+    }
+
+    @Test
+    void dealTurn_logsCardsDealt() {
+        round.dealFlop();
+        round.dealTurn();
+        assertThat(round.getRoundLog()).hasSize(3);
+        assertThat(round.getRoundLog().get(2)).matches(TURN_REGEX);
+    }
+
+    @Test
+    void dealRiver_logsCardsDealt() {
+        round.dealFlop();
+        round.dealTurn();
+        round.dealRiver();
+        assertThat(round.getRoundLog()).hasSize(4);
+        assertThat(round.getRoundLog().get(3)).matches(RIVER_REGEX);
+    }
+
+    @Test
+    void printRoundLog() {
+        round.dealFlop();
+        round.dealTurn();
+        round.dealRiver();
+        String regex = PRE_FLOP_REGEX + FLOP_REGEX + TURN_REGEX + RIVER_REGEX;
+        assertThat(round.printRoundLog()).matches(regex);
+    }
+
 
     @Test
     void stageIsProgressed() {

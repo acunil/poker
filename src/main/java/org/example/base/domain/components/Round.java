@@ -35,7 +35,8 @@ public class Round {
     @Getter
     protected Card river;
 
-    private StringBuilder roundLog = new StringBuilder();
+    @Getter
+    private final ArrayList<String> roundLog = new ArrayList<>();
 
 
     public void dealPocketCards() {
@@ -55,6 +56,7 @@ public class Round {
         progressStage();
         int cardsDealtAlready = players.size() * HOLDEM_POCKET_SIZE;
         flop = deck.subList(cardsDealtAlready, cardsDealtAlready + 3);
+        logCardsDealt();
     }
 
     public void dealTurn() {
@@ -62,6 +64,7 @@ public class Round {
         progressStage();
         int cardsDealtAlready = players.size() * HOLDEM_POCKET_SIZE + 3;
         turn = deck.get(cardsDealtAlready);
+        logCardsDealt();
     }
 
     public void dealRiver() {
@@ -69,6 +72,7 @@ public class Round {
         progressStage();
         int cardsDealtAlready = players.size() * HOLDEM_POCKET_SIZE + 4;
         river = deck.get(cardsDealtAlready);
+        logCardsDealt();
     }
 
     private void progressStage() {
@@ -81,6 +85,7 @@ public class Round {
         }
     }
 
+    @SuppressWarnings("unused")
     public List<Card> getCommunityCards() {
         ArrayList<Card> communityCards = new ArrayList<>(flop);
         if (stage == Stage.FLOP) {
@@ -99,27 +104,22 @@ public class Round {
 
     private void logCardsDealt() {
         if (stage == Stage.PREFLOP) {
-            players.forEach(player -> roundLog.append(player.logStatus()));
+            StringBuilder playerLogs = new StringBuilder();
+            players.forEach(player -> playerLogs.append(player.logStatus()));
+            roundLog.add(playerLogs.toString());
         }
         if (stage == Stage.FLOP) {
-            roundLog.append("Flop: ")
-                    .append(GeneralUtils.getLabelFromCards(flop))
-                    .append("\n");
+            String flopLog = "Flop: " + GeneralUtils.getLabelFromCards(flop) + "\n";
+            roundLog.add(flopLog);
         }
         if (stage == Stage.TURN) {
-            roundLog.append("Turn: ")
-                    .append(turn.getLabel())
-                    .append("\n");
+            String turnLog = "Turn: " + turn.getLabel() + "\n";
+            roundLog.add(turnLog);
         }
         if (stage == Stage.RIVER) {
-            roundLog.append("Turn: ")
-                    .append(river.getLabel())
-                    .append("\n");
+            String riverLog = "River: " + river.getLabel() + "\n";
+            roundLog.add(riverLog);
         }
-    }
-
-    protected String getRoundLog() {
-        return roundLog.toString();
     }
 
     private void checkStage(Stage stage) {
@@ -128,4 +128,7 @@ public class Round {
         }
     }
 
+    public String printRoundLog() {
+        return String.join("", roundLog);
+    }
 }
