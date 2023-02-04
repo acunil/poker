@@ -18,6 +18,7 @@ public class GeneralUtils {
     }
 
     public static final int HOLDEM_INPUT_SIZE = 7;
+    public static final int HOLDEM_POCKET_SIZE = 2;
 
     public static Integer getHighestCardTypeValue(List<CardType> input) {
         Optional<CardType> highestCardType = input.stream().max(Comparator.comparingInt(CardType::getValue));
