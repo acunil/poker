@@ -13,10 +13,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Player {
 
-    public Player(String name, Integer chips, Integer position) {
+    public Player(String name, Integer chips) {
         this.name = name;
         this.chips = chips;
-        this.position = position;
     }
 
     @Getter
@@ -35,6 +34,10 @@ public class Player {
     @Setter
     private List<Card> pocketCards;
 
+    @Getter
+    @Setter
+    public boolean isActive = true;
+
     public Hand getBestHand(List<Card> communityCards) {
         ArrayList<Card> combinedCards = new ArrayList<>();
         combinedCards.addAll(communityCards);
@@ -44,15 +47,15 @@ public class Player {
 
     public Integer placeBet(Integer bet) {
         if (bet > chips) {
-            return null;
+            throw new IllegalArgumentException(
+                String.format("Player %s can not bet %s. Player chips: %s", name, bet, chips));
         }
         chips -= bet;
         return chips;
     }
 
-    public Integer winPot(Integer pot) {
+    public void winPot(Integer pot) {
         chips += pot;
-        return chips;
     }
 
     public String logStatus() {

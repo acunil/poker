@@ -11,6 +11,7 @@ import org.example.base.domain.utils.RoundUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.example.base.domain.utils.GeneralUtils.HOLDEM_POCKET_SIZE;
 
@@ -89,7 +90,6 @@ public class Round {
         }
     }
 
-    @SuppressWarnings("unused")
     public List<Card> getCommunityCards() {
         ArrayList<Card> communityCards = new ArrayList<>(flop);
         if (stage == Stage.FLOP) {
@@ -140,7 +140,24 @@ public class Round {
         pot += amount;
     }
 
+    public List<Player> getActivePlayers() {
+        return players.stream().filter(Player::isActive).toList();
+    }
+
     public List<Player> getWinningPlayers() {
-        return RoundUtils.getWinningPlayers(this);
+        return RoundUtils.getWinningPlayers(getActivePlayers(), getCommunityCards());
+    }
+
+    @SuppressWarnings("unused")
+    private void distributePot() {
+        List<Player> winningPlayers = getWinningPlayers();
+        String winningPlayersNames = winningPlayers.stream().map(Player::getName).collect(Collectors.joining(", "));
+        Integer numWinners = winningPlayers.size();
+        Integer potShare = pot / numWinners;
+        String splitPot = numWinners == 1 ? "s" : "";
+        String potReport = String.format("Final pot size: %s | Winner%s: %s", pot, splitPot, winningPlayersNames);
+
+        roundLog.add(potReport);
+        winningPlayers.forEach(player -> player.winPot(potShare));
     }
 }

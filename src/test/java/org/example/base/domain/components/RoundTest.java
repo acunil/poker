@@ -25,8 +25,8 @@ class RoundTest {
     @BeforeEach
     void setUp() {
         round = new Round();
-        player1 = new Player("Red", 100, 0);
-        player2 = new Player("Blue", 150, 1);
+        player1 = new Player("Red", 100);
+        player2 = new Player("Blue", 150);
         round.setPlayers(List.of(player1, player2));
         round.dealPocketCards();
     }
@@ -104,5 +104,16 @@ class RoundTest {
         round.incrementPot(11);
         assertThat(round.getPot()).isEqualTo(16);
     }
+
+    @Test
+    void getActivePlayers() {
+        Player player3 = new Player("Yellow", 0);
+        player3.setActive(false);
+        assertThat(round.getActivePlayers())
+            .hasSize(2)
+            .allMatch(Player::isActive)
+            .containsOnly(player1, player2);
+    }
+
 
 }
