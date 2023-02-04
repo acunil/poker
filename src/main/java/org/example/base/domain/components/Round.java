@@ -92,18 +92,14 @@ public class Round {
 
     public List<Card> getCommunityCards() {
         ArrayList<Card> communityCards = new ArrayList<>(flop);
-        if (stage == Stage.FLOP) {
-            return communityCards;
-        }
         if (stage == Stage.TURN) {
             communityCards.add(turn);
-            return communityCards;
         }
         if (stage == Stage.RIVER) {
+            communityCards.add(turn);
             communityCards.add(river);
-            return communityCards;
         }
-        return List.of();
+        return communityCards;
     }
 
     private void logCardsDealt() {
@@ -148,14 +144,15 @@ public class Round {
         return RoundUtils.getWinningPlayers(getActivePlayers(), getCommunityCards());
     }
 
-    @SuppressWarnings("unused")
-    private void distributePot() {
+    public void distributePot() {
         List<Player> winningPlayers = getWinningPlayers();
-        String winningPlayersNames = winningPlayers.stream().map(Player::getName).collect(Collectors.joining(", "));
+        String winningPlayersNames = winningPlayers.stream()
+            .map(Player::getName)
+            .collect(Collectors.joining(", "));
         Integer numWinners = winningPlayers.size();
         Integer potShare = pot / numWinners;
-        String splitPot = numWinners == 1 ? "s" : "";
-        String potReport = String.format("Final pot size: %s | Winner%s: %s", pot, splitPot, winningPlayersNames);
+        String plural = numWinners == 1 ? "" : "s";
+        String potReport = String.format("Final pot size: %s | Winner%s: %s", pot, plural, winningPlayersNames);
 
         roundLog.add(potReport);
         winningPlayers.forEach(player -> player.winPot(potShare));

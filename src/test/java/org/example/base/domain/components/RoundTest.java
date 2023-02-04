@@ -6,6 +6,7 @@ import org.example.base.domain.utils.GeneralUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,6 +28,8 @@ class RoundTest {
         round = new Round();
         player1 = new Player("Red", 100);
         player2 = new Player("Blue", 150);
+        player1.setPosition(0);
+        player2.setPosition(1);
         round.setPlayers(List.of(player1, player2));
         round.dealPocketCards();
     }
@@ -113,6 +116,19 @@ class RoundTest {
             .hasSize(2)
             .allMatch(Player::isActive)
             .containsOnly(player1, player2);
+    }
+
+    @Test
+    void distributePot() {
+        round.incrementPot(120);
+        round.dealFlop();
+        round.dealTurn();
+        round.dealRiver();
+        round.distributePot();
+        ArrayList<String> roundLog = round.getRoundLog();
+        String potReport = roundLog.get(roundLog.size() - 1);
+        String regex = "Final pot size: 120 \\| Winners?: \\w+(, \\w+)*";
+        assertThat(potReport).matches(regex);
     }
 
 
