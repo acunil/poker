@@ -96,4 +96,13 @@ class RoundTest {
         assertThat(round.getStage()).isEqualTo(Stage.RIVER);
     }
 
+    @Test
+    void incrementPot() {
+        assertThat(round.getPot()).isZero();
+        round.incrementPot(5);
+        assertThat(round.getPot()).isEqualTo(5);
+        round.incrementPot(11);
+        assertThat(round.getPot()).isEqualTo(16);
+    }
+
 }

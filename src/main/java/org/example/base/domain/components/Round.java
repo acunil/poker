@@ -7,6 +7,7 @@ import org.example.base.domain.enums.Card;
 import org.example.base.domain.enums.Stage;
 import org.example.base.domain.utils.DealUtils;
 import org.example.base.domain.utils.GeneralUtils;
+import org.example.base.domain.utils.RoundUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,9 @@ public class Round {
 
     @Getter
     private Stage stage = Stage.PREFLOP;
+
+    @Getter
+    private Integer pot = 0;
 
     @Getter
     private List<Card> flop;
@@ -130,5 +134,13 @@ public class Round {
 
     public String printRoundLog() {
         return String.join("", roundLog);
+    }
+
+    public void incrementPot(Integer amount) {
+        pot += amount;
+    }
+
+    public List<Player> getWinningPlayers() {
+        return RoundUtils.getWinningPlayers(this);
     }
 }
