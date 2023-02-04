@@ -5,6 +5,8 @@ import org.example.base.domain.enums.Stage;
 import org.example.base.domain.utils.GeneralUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +120,8 @@ class RoundTest {
             .containsOnly(player1, player2);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6,7,8,9,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1})
     void distributePot() {
         int initialPlayerChips = player1.getChips() + player2.getChips();
         round.incrementPot(120);
@@ -129,7 +132,7 @@ class RoundTest {
 
         ArrayList<String> roundLog = round.getRoundLog();
         String potReport = roundLog.get(roundLog.size() - 1);
-        String regex = "Final pot size: 120 \\| Winners?: \\w+(, \\w+)*";
+        String regex = "Final pot size: 120 \\| Winners?: (\\w+ - [\\w ]+ - (?>[AKQJTZ2-9][SCHD],?){5}( // )?)+";
         assertThat(potReport).matches(regex);
 
         int resultingPlayerChips = player1.getChips() + player2.getChips();

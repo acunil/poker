@@ -11,9 +11,9 @@ import org.example.base.domain.utils.RoundUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.example.base.domain.utils.GeneralUtils.HOLDEM_POCKET_SIZE;
+import static org.example.base.domain.utils.GeneralUtils.getLabelFromCards;
 
 @RequiredArgsConstructor
 public class Round {
@@ -146,15 +146,23 @@ public class Round {
 
     public void distributePot() {
         List<Player> winningPlayers = getWinningPlayers();
-        String winningPlayersNames = winningPlayers.stream()
-            .map(Player::getName)
-            .collect(Collectors.joining(", "));
+        String winningPlayerSummary = formulateWinningPlayerSummary(winningPlayers);
         Integer numWinners = winningPlayers.size();
         Integer potShare = pot / numWinners;
         String plural = numWinners == 1 ? "" : "s";
-        String potReport = String.format("Final pot size: %s | Winner%s: %s", pot, plural, winningPlayersNames);
+        String potReport = String.format("Final pot size: %s | Winner%s: %s", pot, plural, winningPlayerSummary);
 
         roundLog.add(potReport);
         winningPlayers.forEach(player -> player.winPot(potShare));
+    }
+
+    private String formulateWinningPlayerSummary(List<Player> winningPlayers) {
+        List<String> winningPlayersSummaries = new ArrayList<>();
+        winningPlayers.forEach(player -> {
+            Hand hand = player.getBestHand(getCommunityCards());
+            String description = String.format("%s - %s - %s", player.getName(), hand.getHandType(), getLabelFromCards(hand.getCards()));
+            winningPlayersSummaries.add(description);
+        });
+        return String.join(" // ", winningPlayersSummaries);
     }
 }
