@@ -120,15 +120,20 @@ class RoundTest {
 
     @Test
     void distributePot() {
+        int initialPlayerChips = player1.getChips() + player2.getChips();
         round.incrementPot(120);
         round.dealFlop();
         round.dealTurn();
         round.dealRiver();
         round.distributePot();
+
         ArrayList<String> roundLog = round.getRoundLog();
         String potReport = roundLog.get(roundLog.size() - 1);
         String regex = "Final pot size: 120 \\| Winners?: \\w+(, \\w+)*";
         assertThat(potReport).matches(regex);
+
+        int resultingPlayerChips = player1.getChips() + player2.getChips();
+        assertThat(resultingPlayerChips).isEqualTo(initialPlayerChips + 120);
     }
 
 
